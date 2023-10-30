@@ -1,0 +1,389 @@
+
+  ******************************************************************************
+  * File Name          :
+  * Date               : 06/02/2022 12:56:30
+  * Description        :
+
+  42000000
+
+  ******************************************************************************
+**/
+
+/*---------------------------- MCU Configuration data -------------------------*/
+
+/* Mcu characteristics */
+
+/* List of used IPs */
+- RCC
+- CAN1
+- SYS
+- USART3
+- USB_OTG_FS
+- NVIC
+- GPIO
+  ------------------------------------------------------------------------------
+  -                         Clock Configuration data
+  ------------------------------------------------------------------------------
+    - PLLI2SQ :  2       [peripheralParams.get("RCC").get("PLLI2SQ")]
+    - PLLI2SN :  192       [peripheralParams.get("RCC").get("PLLI2SN")]
+    - PLLI2SR :  2       [peripheralParams.get("RCC").get("PLLI2SR")]
+    - APB2Freq_Value :  84000000       [peripheralParams.get("RCC").get("APB2Freq_Value")]
+    - ExtClockEnable :  false       [peripheralParams.get("RCC").get("ExtClockEnable")]
+    - DATA_CACHE_ENABLE :  1       [peripheralParams.get("RCC").get("DATA_CACHE_ENABLE")]
+    - FCLKCortexFreq_Value :  168000000       [peripheralParams.get("RCC").get("FCLKCortexFreq_Value")]
+    - AHBFreq_Value :  168000000       [peripheralParams.get("RCC").get("AHBFreq_Value")]
+    - 48MHZClocksFreq_Value :  48000000       [peripheralParams.get("RCC").get("48MHZClocksFreq_Value")]
+    - VCOInputFreq_Value :  2000000       [peripheralParams.get("RCC").get("VCOInputFreq_Value")]
+    - PLLSourceVirtual :  RCC_PLLSOURCE_HSE       [peripheralParams.get("RCC").get("PLLSourceVirtual")]
+    - ClockTypeSysClk :  RCC_CLOCKTYPE_SYSCLK       [peripheralParams.get("RCC").get("ClockTypeSysClk")]
+    - HSEUsed :  1       [peripheralParams.get("RCC").get("HSEUsed")]
+    - EnableLSERTC :  false       [peripheralParams.get("RCC").get("EnableLSERTC")]
+    - LSE_VALUE :  32768       [peripheralParams.get("RCC").get("LSE_VALUE")]
+    - LTDCEnable :  false       [peripheralParams.get("RCC").get("LTDCEnable")]
+    - HSE_VALUE :  8000000       [peripheralParams.get("RCC").get("HSE_VALUE")]
+    - APB1TimCLKDivider :  2       [peripheralParams.get("RCC").get("APB1TimCLKDivider")]
+    - RTCEnable :  false       [peripheralParams.get("RCC").get("RTCEnable")]
+    - PLLI2SCLKSAIA_BEnable :  false       [peripheralParams.get("RCC").get("PLLI2SCLKSAIA_BEnable")]
+    - driver :  HAL       [peripheralParams.get("RCC").get("driver")]
+    - RCC_TIM_PRescaler_Selection :  RCC_TIMPRES_DESACTIVATED       [peripheralParams.get("RCC").get("RCC_TIM_PRescaler_Selection")]
+    - PLLCLKFreq_Value :  168000000       [peripheralParams.get("RCC").get("PLLCLKFreq_Value")]
+    - PWR_Regulator_Voltage_Scale :  PWR_REGULATOR_VOLTAGE_SCALE1       [peripheralParams.get("RCC").get("PWR_Regulator_Voltage_Scale")]
+    - PLLSAIN :  49       [peripheralParams.get("RCC").get("PLLSAIN")]
+    - PLLSAIQ :  4       [peripheralParams.get("RCC").get("PLLSAIQ")]
+    - OscillatorType :  RCC_OSCILLATORTYPE_HSE       [peripheralParams.get("RCC").get("OscillatorType")]
+    - PLLSAIR :  2       [peripheralParams.get("RCC").get("PLLSAIR")]
+    - AHBCLKDivider :  RCC_SYSCLK_DIV1       [peripheralParams.get("RCC").get("AHBCLKDivider")]
+    - Instance :  RCC       [peripheralParams.get("RCC").get("Instance")]
+    - HCLKFreq_Value :  168000000       [peripheralParams.get("RCC").get("HCLKFreq_Value")]
+    - HSE_Timout :  100       [peripheralParams.get("RCC").get("HSE_Timout")]
+    - PLLI2SDivQ :  1       [peripheralParams.get("RCC").get("PLLI2SDivQ")]
+    - WatchDogFreq_Value :  32000       [peripheralParams.get("RCC").get("WatchDogFreq_Value")]
+    - LSIUsed :  0       [peripheralParams.get("RCC").get("LSIUsed")]
+    - PLLUsed :  1       [peripheralParams.get("RCC").get("PLLUsed")]
+    - PLLM :  4       [peripheralParams.get("RCC").get("PLLM")]
+    - PLLN :  168       [peripheralParams.get("RCC").get("PLLN")]
+    - CortexFreq_Value :  168000000       [peripheralParams.get("RCC").get("CortexFreq_Value")]
+    - SAI_BClocksFreq_Value :  24500000       [peripheralParams.get("RCC").get("SAI_BClocksFreq_Value")]
+    - INSTRUCTION_CACHE_ENABLE :  1       [peripheralParams.get("RCC").get("INSTRUCTION_CACHE_ENABLE")]
+    - RCC_RTC_Clock_Source_FROM_HSE :  RCC_RTCCLKSOURCE_HSE_DIV2       [peripheralParams.get("RCC").get("RCC_RTC_Clock_Source_FROM_HSE")]
+    - OscillatorTypeLSI :         [peripheralParams.get("RCC").get("OscillatorTypeLSI")]
+    - RCC_MCO1Source :  RCC_MCO1SOURCE_HSI       [peripheralParams.get("RCC").get("RCC_MCO1Source")]
+    - OscillatorTypeLSE :         [peripheralParams.get("RCC").get("OscillatorTypeLSE")]
+    - OscillatorTypeHSI :         [peripheralParams.get("RCC").get("OscillatorTypeHSI")]
+    - OscillatorTypeHSE :  RCC_OSCILLATORTYPE_HSE       [peripheralParams.get("RCC").get("OscillatorTypeHSE")]
+    - PLLSource :  RCC_PLLSOURCE_HSI       [peripheralParams.get("RCC").get("PLLSource")]
+    - ClockTypePCLK2 :  RCC_CLOCKTYPE_PCLK2       [peripheralParams.get("RCC").get("ClockTypePCLK2")]
+    - USBFSEnable :  true       [peripheralParams.get("RCC").get("USBFSEnable")]
+    - RCC_RTC_Clock_Source :  RCC_RTCCLKSOURCE_LSE       [peripheralParams.get("RCC").get("RCC_RTC_Clock_Source")]
+    - LSI_VALUE :  32000       [peripheralParams.get("RCC").get("LSI_VALUE")]
+    - APB1TimFreq_Value :  84000000       [peripheralParams.get("RCC").get("APB1TimFreq_Value")]
+    - USBHSEnable :  false       [peripheralParams.get("RCC").get("USBHSEnable")]
+    - SAI_AClocksFreq_Value :  24500000       [peripheralParams.get("RCC").get("SAI_AClocksFreq_Value")]
+    - LSEUsed :  0       [peripheralParams.get("RCC").get("LSEUsed")]
+    - MCO2PinFreq_Value :  168000000       [peripheralParams.get("RCC").get("MCO2PinFreq_Value")]
+    - RCC_PERIPHCLK_I2SVar :         [peripheralParams.get("RCC").get("RCC_PERIPHCLK_I2SVar")]
+    - PLLState :  RCC_PLL_ON       [peripheralParams.get("RCC").get("PLLState")]
+    - ClockTypePCLK1 :  RCC_CLOCKTYPE_PCLK1       [peripheralParams.get("RCC").get("ClockTypePCLK1")]
+    - APB1CLKDivider :  RCC_HCLK_DIV4       [peripheralParams.get("RCC").get("APB1CLKDivider")]
+    - I2SEnable :  false       [peripheralParams.get("RCC").get("I2SEnable")]
+    - RCC_PERIPHCLK_SAI_PLLSAIVar :         [peripheralParams.get("RCC").get("RCC_PERIPHCLK_SAI_PLLSAIVar")]
+    - HSEState :  RCC_HSE_BYPASS       [peripheralParams.get("RCC").get("HSEState")]
+    - LSEState :  RCC_LSE_ON       [peripheralParams.get("RCC").get("LSEState")]
+    - RCC_MCO2Source :  RCC_MCO2SOURCE_SYSCLK       [peripheralParams.get("RCC").get("RCC_MCO2Source")]
+    - I2SClocksFreq_Value :  192000000       [peripheralParams.get("RCC").get("I2SClocksFreq_Value")]
+    - VCOSAIOutputFreq_Value :  98000000       [peripheralParams.get("RCC").get("VCOSAIOutputFreq_Value")]
+    - SYSCLKFreq_VALUE :  168000000       [peripheralParams.get("RCC").get("SYSCLKFreq_VALUE")]
+    - HSICalibrationValue :  16       [peripheralParams.get("RCC").get("HSICalibrationValue")]
+    - SDIOEnable :  false       [peripheralParams.get("RCC").get("SDIOEnable")]
+    - PLLQ :  7       [peripheralParams.get("RCC").get("PLLQ")]
+    - PLLP :  RCC_PLLP_DIV2       [peripheralParams.get("RCC").get("PLLP")]
+    - SYSCLKSource :  RCC_SYSCLKSOURCE_PLLCLK       [peripheralParams.get("RCC").get("SYSCLKSource")]
+    - Cortex_Div :  SYSTICK_CLKSOURCE_HCLK       [peripheralParams.get("RCC").get("Cortex_Div")]
+    - HSI_VALUE :  16000000       [peripheralParams.get("RCC").get("HSI_VALUE")]
+    - MCO2OutPutEnable :  false       [peripheralParams.get("RCC").get("MCO2OutPutEnable")]
+    - RCC_PERIPHCLK_TIMVar :         [peripheralParams.get("RCC").get("RCC_PERIPHCLK_TIMVar")]
+    - LCDTFTFreq_Value :  24500000       [peripheralParams.get("RCC").get("LCDTFTFreq_Value")]
+    - VCOI2SOutputFreq_Value :  384000000       [peripheralParams.get("RCC").get("VCOI2SOutputFreq_Value")]
+    - RNGEnable :  false       [peripheralParams.get("RCC").get("RNGEnable")]
+    - MCO1OutPutEnable :  false       [peripheralParams.get("RCC").get("MCO1OutPutEnable")]
+    - PLLSAIDivQ :  1       [peripheralParams.get("RCC").get("PLLSAIDivQ")]
+    - PLLSAIDivR :  RCC_PLLSAIDIVR_2       [peripheralParams.get("RCC").get("PLLSAIDivR")]
+    - HSIState :  RCC_HSI_OFF       [peripheralParams.get("RCC").get("HSIState")]
+    - RTCFreq_Value :  32000       [peripheralParams.get("RCC").get("RTCFreq_Value")]
+    - IWDGEnable :  false       [peripheralParams.get("RCC").get("IWDGEnable")]
+    - VDD_VALUE :  3       [peripheralParams.get("RCC").get("VDD_VALUE")]
+    - RCC_PERIPHCLK_SAI_PLLI2SVar :         [peripheralParams.get("RCC").get("RCC_PERIPHCLK_SAI_PLLI2SVar")]
+    - MCO1PinFreq_Value :  16000000       [peripheralParams.get("RCC").get("MCO1PinFreq_Value")]
+    - I2SClockSource :  I2S_CLOCK_PLL       [peripheralParams.get("RCC").get("I2SClockSource")]
+    - RCC_MCODiv1 :  RCC_MCODIV_1       [peripheralParams.get("RCC").get("RCC_MCODiv1")]
+    - RCC_MCODiv2 :  RCC_MCODIV_1       [peripheralParams.get("RCC").get("RCC_MCODiv2")]
+    - EnableLSE :  true       [peripheralParams.get("RCC").get("EnableLSE")]
+    - EthernetFreq_Value :  168000000       [peripheralParams.get("RCC").get("EthernetFreq_Value")]
+    - EnableExtClockForSAIA :  false       [peripheralParams.get("RCC").get("EnableExtClockForSAIA")]
+    - EnableExtClockForI2S :  false       [peripheralParams.get("RCC").get("EnableExtClockForI2S")]
+    - APB2CLKDivider :  RCC_HCLK_DIV2       [peripheralParams.get("RCC").get("APB2CLKDivider")]
+    - LSIState :  RCC_LSI_OFF       [peripheralParams.get("RCC").get("LSIState")]
+    - PREFETCH_ENABLE :  1       [peripheralParams.get("RCC").get("PREFETCH_ENABLE")]
+    - EnableHSE :  true       [peripheralParams.get("RCC").get("EnableHSE")]
+    - FLatency :  FLASH_LATENCY_5       [peripheralParams.get("RCC").get("FLatency")]
+    - VCOOutputFreq_Value :  336000000       [peripheralParams.get("RCC").get("VCOOutputFreq_Value")]
+    - SAIAEnable :  false       [peripheralParams.get("RCC").get("SAIAEnable")]
+    - EXTERNAL_CLOCK_VALUE :  12288000       [peripheralParams.get("RCC").get("EXTERNAL_CLOCK_VALUE")]
+    - LSE_Timout :  5000       [peripheralParams.get("RCC").get("LSE_Timout")]
+    - APB1Freq_Value :  42000000       [peripheralParams.get("RCC").get("APB1Freq_Value")]
+    - ClockTypeHCLK :  RCC_CLOCKTYPE_HCLK       [peripheralParams.get("RCC").get("ClockTypeHCLK")]
+    - EnableHSERTCDevisor :  false       [peripheralParams.get("RCC").get("EnableHSERTCDevisor")]
+    - EnableExtClockForSAIB :  false       [peripheralParams.get("RCC").get("EnableExtClockForSAIB")]
+    - SAIClockSource_BlockA :  SAI_CLKSOURCE_PLLSAI       [peripheralParams.get("RCC").get("SAIClockSource_BlockA")]
+    - SAIClockSource_BlockB :  SAI_CLKSOURCE_PLLSAI       [peripheralParams.get("RCC").get("SAIClockSource_BlockB")]
+    - SAIBEnable :  false       [peripheralParams.get("RCC").get("SAIBEnable")]
+    - HSIUsed :  0       [peripheralParams.get("RCC").get("HSIUsed")]
+    - RTCHSEDivFreq_Value :  4000000       [peripheralParams.get("RCC").get("RTCHSEDivFreq_Value")]
+    - PWREXT_OverDrive :  PWREXT_OverDrive_DESACTIVATED       [peripheralParams.get("RCC").get("PWREXT_OverDrive")]
+    - APB2TimFreq_Value :  168000000       [peripheralParams.get("RCC").get("APB2TimFreq_Value")]
+    - ClockType :  RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK|RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2       [peripheralParams.get("RCC").get("ClockType")]
+
+  ------------------------------------------------------------------------------
+  -                         CAN1 Configuration data  : Driver type = HAL
+  ------------------------------------------------------------------------------
+     GPIO configuration
+    -------------------
+    - CAN1_RX :
+       - GPIO_Speed : GPIO_SPEED_FREQ_VERY_HIGH         [peripheralGPIOParams.get("CAN1").get("CAN1_RX").value.get("GPIO_Speed")]
+       - Pin : PB8         [peripheralGPIOParams.get("CAN1").get("CAN1_RX").value.get("Pin")]
+       - GPIOx : GPIOB         [peripheralGPIOParams.get("CAN1").get("CAN1_RX").value.get("GPIOx")]
+       - GPIO_PuPd : GPIO_NOPULL         [peripheralGPIOParams.get("CAN1").get("CAN1_RX").value.get("GPIO_PuPd")]
+       - Port : PB         [peripheralGPIOParams.get("CAN1").get("CAN1_RX").value.get("Port")]
+       - GPIO_Label :          [peripheralGPIOParams.get("CAN1").get("CAN1_RX").value.get("GPIO_Label")]
+       - GPIO_Pin : GPIO_PIN_8         [peripheralGPIOParams.get("CAN1").get("CAN1_RX").value.get("GPIO_Pin")]
+       - GPIO_AF : GPIO_AF9_CAN1         [peripheralGPIOParams.get("CAN1").get("CAN1_RX").value.get("GPIO_AF")]
+       - GPIO_Mode : GPIO_MODE_AF_PP         [peripheralGPIOParams.get("CAN1").get("CAN1_RX").value.get("GPIO_Mode")]
+    - CAN1_TX :
+       - GPIO_Speed : GPIO_SPEED_FREQ_VERY_HIGH         [peripheralGPIOParams.get("CAN1").get("CAN1_TX").value.get("GPIO_Speed")]
+       - Pin : PB9         [peripheralGPIOParams.get("CAN1").get("CAN1_TX").value.get("Pin")]
+       - GPIOx : GPIOB         [peripheralGPIOParams.get("CAN1").get("CAN1_TX").value.get("GPIOx")]
+       - GPIO_PuPd : GPIO_NOPULL         [peripheralGPIOParams.get("CAN1").get("CAN1_TX").value.get("GPIO_PuPd")]
+       - Port : PB         [peripheralGPIOParams.get("CAN1").get("CAN1_TX").value.get("Port")]
+       - GPIO_Label :          [peripheralGPIOParams.get("CAN1").get("CAN1_TX").value.get("GPIO_Label")]
+       - GPIO_Pin : GPIO_PIN_9         [peripheralGPIOParams.get("CAN1").get("CAN1_TX").value.get("GPIO_Pin")]
+       - GPIO_AF : GPIO_AF9_CAN1         [peripheralGPIOParams.get("CAN1").get("CAN1_TX").value.get("GPIO_AF")]
+       - GPIO_Mode : GPIO_MODE_AF_PP         [peripheralGPIOParams.get("CAN1").get("CAN1_TX").value.get("GPIO_Mode")]
+
+     IP paramters configuration
+    ---------------------------
+    - BS2 :  CAN_BS2_8TQ       [peripheralParams.get("CAN1").get("BS2")]
+    - BS1 :  CAN_BS1_12TQ       [peripheralParams.get("CAN1").get("BS1")]
+    - SJW :  CAN_SJW_1TQ       [peripheralParams.get("CAN1").get("SJW")]
+    - ABOM :  DISABLE       [peripheralParams.get("CAN1").get("ABOM")]
+    - Instance :  CAN$Index       [peripheralParams.get("CAN1").get("Instance")]
+    - CalculateTimeQuantum :  47       [peripheralParams.get("CAN1").get("CalculateTimeQuantum")]
+    - Mode :  CAN_MODE_NORMAL       [peripheralParams.get("CAN1").get("Mode")]
+    - TXFP :  DISABLE       [peripheralParams.get("CAN1").get("TXFP")]
+    - TTCM :  DISABLE       [peripheralParams.get("CAN1").get("TTCM")]
+    - AWUM :  DISABLE       [peripheralParams.get("CAN1").get("AWUM")]
+    - NART :  DISABLE       [peripheralParams.get("CAN1").get("NART")]
+    - RFLM :  DISABLE       [peripheralParams.get("CAN1").get("RFLM")]
+    - driver :  HAL       [peripheralParams.get("CAN1").get("driver")]
+    - CalculateTimeBit :  1000       [peripheralParams.get("CAN1").get("CalculateTimeBit")]
+    - Prescaler :  2       [peripheralParams.get("CAN1").get("Prescaler")]
+    - CalculateBaudRate :  1000000       [peripheralParams.get("CAN1").get("CalculateBaudRate")]
+
+     Interrupt IP paramters configuration
+    ---------------------------
+    - CAN1_RX0_IRQn :
+       - interruptPremptionPriority : 5         [peripheralNVICParams.get("CAN1").get("CAN1_RX0_IRQn").value.get("interruptPremptionPriority")]
+       - PriorityGroup : NVIC_PRIORITYGROUP_4         [peripheralNVICParams.get("CAN1").get("CAN1_RX0_IRQn").value.get("PriorityGroup")]
+       - Subriority : 0         [peripheralNVICParams.get("CAN1").get("CAN1_RX0_IRQn").value.get("Subriority")]
+
+  ------------------------------------------------------------------------------
+  -                         SYS Configuration data  : Driver type = HAL
+  ------------------------------------------------------------------------------
+     GPIO configuration
+    -------------------
+    - SYS_JTMS-SWDIO :
+       - Pin : PA13         [peripheralGPIOParams.get("SYS").get("SYS_JTMS-SWDIO").value.get("Pin")]
+       - Port : PA         [peripheralGPIOParams.get("SYS").get("SYS_JTMS-SWDIO").value.get("Port")]
+       - GPIO_Label : TMS         [peripheralGPIOParams.get("SYS").get("SYS_JTMS-SWDIO").value.get("GPIO_Label")]
+    - SYS_JTCK-SWCLK :
+       - Pin : PA14         [peripheralGPIOParams.get("SYS").get("SYS_JTCK-SWCLK").value.get("Pin")]
+       - Port : PA         [peripheralGPIOParams.get("SYS").get("SYS_JTCK-SWCLK").value.get("Port")]
+       - GPIO_Label : TCK         [peripheralGPIOParams.get("SYS").get("SYS_JTCK-SWCLK").value.get("GPIO_Label")]
+
+     IP paramters configuration
+    ---------------------------
+    - instance :  TIM6       [peripheralParams.get("SYS").get("instance")]
+    - driver :  HAL       [peripheralParams.get("SYS").get("driver")]
+    - Instance :  SYS       [peripheralParams.get("SYS").get("Instance")]
+
+  ------------------------------------------------------------------------------
+  -                         USART3 Configuration data  : Driver type = HAL
+  ------------------------------------------------------------------------------
+     GPIO configuration
+    -------------------
+    - USART3_TX :
+       - GPIO_ModeDefaultPP : GPIO_MODE_AF_PP         [peripheralGPIOParams.get("USART3").get("USART3_TX").value.get("GPIO_ModeDefaultPP")]
+       - GPIO_Speed : GPIO_SPEED_FREQ_VERY_HIGH         [peripheralGPIOParams.get("USART3").get("USART3_TX").value.get("GPIO_Speed")]
+       - Pin : PD8         [peripheralGPIOParams.get("USART3").get("USART3_TX").value.get("Pin")]
+       - GPIOx : GPIOD         [peripheralGPIOParams.get("USART3").get("USART3_TX").value.get("GPIOx")]
+       - GPIO_PuPd : GPIO_NOPULL         [peripheralGPIOParams.get("USART3").get("USART3_TX").value.get("GPIO_PuPd")]
+       - Port : PD         [peripheralGPIOParams.get("USART3").get("USART3_TX").value.get("Port")]
+       - GPIO_Label : STLK_RX [STM32F103CBT6_PA3]         [peripheralGPIOParams.get("USART3").get("USART3_TX").value.get("GPIO_Label")]
+       - GPIO_Pin : GPIO_PIN_8         [peripheralGPIOParams.get("USART3").get("USART3_TX").value.get("GPIO_Pin")]
+       - GPIO_AF : GPIO_AF7_USART3         [peripheralGPIOParams.get("USART3").get("USART3_TX").value.get("GPIO_AF")]
+    - USART3_RX :
+       - GPIO_ModeDefaultPP : GPIO_MODE_AF_PP         [peripheralGPIOParams.get("USART3").get("USART3_RX").value.get("GPIO_ModeDefaultPP")]
+       - GPIO_Speed : GPIO_SPEED_FREQ_VERY_HIGH         [peripheralGPIOParams.get("USART3").get("USART3_RX").value.get("GPIO_Speed")]
+       - Pin : PD9         [peripheralGPIOParams.get("USART3").get("USART3_RX").value.get("Pin")]
+       - GPIOx : GPIOD         [peripheralGPIOParams.get("USART3").get("USART3_RX").value.get("GPIOx")]
+       - GPIO_PuPd : GPIO_NOPULL         [peripheralGPIOParams.get("USART3").get("USART3_RX").value.get("GPIO_PuPd")]
+       - Port : PD         [peripheralGPIOParams.get("USART3").get("USART3_RX").value.get("Port")]
+       - GPIO_Label : STLK_TX [STM32F103CBT6_PA2]         [peripheralGPIOParams.get("USART3").get("USART3_RX").value.get("GPIO_Label")]
+       - GPIO_Pin : GPIO_PIN_9         [peripheralGPIOParams.get("USART3").get("USART3_RX").value.get("GPIO_Pin")]
+       - GPIO_AF : GPIO_AF7_USART3         [peripheralGPIOParams.get("USART3").get("USART3_RX").value.get("GPIO_AF")]
+
+     IP paramters configuration
+    ---------------------------
+    - StopBits :  STOPBITS_1       [peripheralParams.get("USART3").get("StopBits")]
+    - OverSampling :  UART_OVERSAMPLING_16       [peripheralParams.get("USART3").get("OverSampling")]
+    - HwFlowCtl :  UART_HWCONTROL_NONE       [peripheralParams.get("USART3").get("HwFlowCtl")]
+    - VirtualMode :  VM_ASYNC       [peripheralParams.get("USART3").get("VirtualMode")]
+    - driver :  HAL       [peripheralParams.get("USART3").get("driver")]
+    - Instance :  USART$Index       [peripheralParams.get("USART3").get("Instance")]
+    - BaudRate :  115200       [peripheralParams.get("USART3").get("BaudRate")]
+    - Mode :  MODE_TX_RX       [peripheralParams.get("USART3").get("Mode")]
+    - WordLength :  WORDLENGTH_8B       [peripheralParams.get("USART3").get("WordLength")]
+    - Parity :  PARITY_NONE       [peripheralParams.get("USART3").get("Parity")]
+
+  ------------------------------------------------------------------------------
+  -                         USB_OTG_FS Configuration data  : Driver type = HAL
+  ------------------------------------------------------------------------------
+     GPIO configuration
+    -------------------
+    - USB_OTG_FS_VBUS :
+       - Pin : PA9         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_VBUS").value.get("Pin")]
+       - GPIOx : GPIOA         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_VBUS").value.get("GPIOx")]
+       - GPIO_PuPd : GPIO_NOPULL         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_VBUS").value.get("GPIO_PuPd")]
+       - Port : PA         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_VBUS").value.get("Port")]
+       - GPIO_Label : USB_VBUS         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_VBUS").value.get("GPIO_Label")]
+       - GPIO_Pin : GPIO_PIN_9         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_VBUS").value.get("GPIO_Pin")]
+       - GPIO_Mode : GPIO_MODE_INPUT         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_VBUS").value.get("GPIO_Mode")]
+    - USB_OTG_FS_DM :
+       - GPIO_Speed : GPIO_SPEED_FREQ_VERY_HIGH         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_DM").value.get("GPIO_Speed")]
+       - Pin : PA11         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_DM").value.get("Pin")]
+       - GPIOx : GPIOA         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_DM").value.get("GPIOx")]
+       - GPIO_PuPd : GPIO_NOPULL         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_DM").value.get("GPIO_PuPd")]
+       - Port : PA         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_DM").value.get("Port")]
+       - GPIO_Label : USB_DM         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_DM").value.get("GPIO_Label")]
+       - GPIO_Pin : GPIO_PIN_11         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_DM").value.get("GPIO_Pin")]
+       - GPIO_AF : GPIO_AF10_OTG_FS         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_DM").value.get("GPIO_AF")]
+       - GPIO_Mode : GPIO_MODE_AF_PP         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_DM").value.get("GPIO_Mode")]
+    - USB_OTG_FS_DP :
+       - GPIO_Speed : GPIO_SPEED_FREQ_VERY_HIGH         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_DP").value.get("GPIO_Speed")]
+       - Pin : PA12         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_DP").value.get("Pin")]
+       - GPIOx : GPIOA         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_DP").value.get("GPIOx")]
+       - GPIO_PuPd : GPIO_NOPULL         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_DP").value.get("GPIO_PuPd")]
+       - Port : PA         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_DP").value.get("Port")]
+       - GPIO_Label : USB_DP         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_DP").value.get("GPIO_Label")]
+       - GPIO_Pin : GPIO_PIN_12         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_DP").value.get("GPIO_Pin")]
+       - GPIO_AF : GPIO_AF10_OTG_FS         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_DP").value.get("GPIO_AF")]
+       - GPIO_Mode : GPIO_MODE_AF_PP         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_DP").value.get("GPIO_Mode")]
+    - USB_OTG_FS_SOF :
+       - GPIO_Speed : GPIO_SPEED_FREQ_VERY_HIGH         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_SOF").value.get("GPIO_Speed")]
+       - Pin : PA8         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_SOF").value.get("Pin")]
+       - GPIOx : GPIOA         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_SOF").value.get("GPIOx")]
+       - GPIO_PuPd : GPIO_NOPULL         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_SOF").value.get("GPIO_PuPd")]
+       - Port : PA         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_SOF").value.get("Port")]
+       - GPIO_Label : USB_SOF [TP1]         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_SOF").value.get("GPIO_Label")]
+       - GPIO_Pin : GPIO_PIN_8         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_SOF").value.get("GPIO_Pin")]
+       - GPIO_AF : GPIO_AF10_OTG_FS         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_SOF").value.get("GPIO_AF")]
+       - GPIO_Mode : GPIO_MODE_AF_PP         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_SOF").value.get("GPIO_Mode")]
+    - USB_OTG_FS_ID :
+       - GPIO_Speed : GPIO_SPEED_FREQ_VERY_HIGH         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_ID").value.get("GPIO_Speed")]
+       - Pin : PA10         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_ID").value.get("Pin")]
+       - GPIOx : GPIOA         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_ID").value.get("GPIOx")]
+       - GPIO_PuPd : GPIO_NOPULL         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_ID").value.get("GPIO_PuPd")]
+       - Port : PA         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_ID").value.get("Port")]
+       - GPIO_Label : USB_ID         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_ID").value.get("GPIO_Label")]
+       - GPIO_Pin : GPIO_PIN_10         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_ID").value.get("GPIO_Pin")]
+       - GPIO_AF : GPIO_AF10_OTG_FS         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_ID").value.get("GPIO_AF")]
+       - GPIO_Mode : GPIO_MODE_AF_PP         [peripheralGPIOParams.get("USB_OTG_FS").get("USB_OTG_FS_ID").value.get("GPIO_Mode")]
+
+     IP paramters configuration
+    ---------------------------
+    - driver :  HAL       [peripheralParams.get("USB_OTG_FS").get("driver")]
+    - Instance :  USB_OTG_FS       [peripheralParams.get("USB_OTG_FS").get("Instance")]
+
+  ------------------------------------------------------------------------------
+  -                         NVIC Configuration data  : Driver type = HAL
+  ------------------------------------------------------------------------------
+     IP paramters configuration
+    ---------------------------
+    - driver :  HAL       [peripheralParams.get("NVIC").get("driver")]
+    - Instance :  NVIC       [peripheralParams.get("NVIC").get("Instance")]
+
+  ------------------------------------------------------------------------------
+  -                         GPIO Configuration data  : Driver type = HAL
+  ------------------------------------------------------------------------------
+     GPIO configuration
+    -------------------
+    - PC13 :
+       - Pin : PC13         [peripheralGPIOParams.get("GPIO").get("PC13").value.get("Pin")]
+       - GPIOx : GPIOC         [peripheralGPIOParams.get("GPIO").get("PC13").value.get("GPIOx")]
+       - GPIO_PuPd : GPIO_NOPULL         [peripheralGPIOParams.get("GPIO").get("PC13").value.get("GPIO_PuPd")]
+       - Port : PC         [peripheralGPIOParams.get("GPIO").get("PC13").value.get("Port")]
+       - GPIO_Label : USER_Btn [B1]         [peripheralGPIOParams.get("GPIO").get("PC13").value.get("GPIO_Label")]
+       - GPIO_Pin : GPIO_PIN_13         [peripheralGPIOParams.get("GPIO").get("PC13").value.get("GPIO_Pin")]
+       - GPIO_ModeDefaultEXTI : GPIO_MODE_IT_RISING         [peripheralGPIOParams.get("GPIO").get("PC13").value.get("GPIO_ModeDefaultEXTI")]
+    - PB14 :
+       - GPIO_Speed : GPIO_SPEED_FREQ_LOW         [peripheralGPIOParams.get("GPIO").get("PB14").value.get("GPIO_Speed")]
+       - Pin : PB14         [peripheralGPIOParams.get("GPIO").get("PB14").value.get("Pin")]
+       - GPIOx : GPIOB         [peripheralGPIOParams.get("GPIO").get("PB14").value.get("GPIOx")]
+       - PinState : GPIO_PIN_RESET         [peripheralGPIOParams.get("GPIO").get("PB14").value.get("PinState")]
+       - GPIO_PuPd : GPIO_NOPULL         [peripheralGPIOParams.get("GPIO").get("PB14").value.get("GPIO_PuPd")]
+       - Port : PB         [peripheralGPIOParams.get("GPIO").get("PB14").value.get("Port")]
+       - GPIO_Label : LD3 [Red]         [peripheralGPIOParams.get("GPIO").get("PB14").value.get("GPIO_Label")]
+       - GPIO_Pin : GPIO_PIN_14         [peripheralGPIOParams.get("GPIO").get("PB14").value.get("GPIO_Pin")]
+       - GPIO_ModeDefaultOutputPP : GPIO_MODE_OUTPUT_PP         [peripheralGPIOParams.get("GPIO").get("PB14").value.get("GPIO_ModeDefaultOutputPP")]
+    - PG7 :
+       - Pin : PG7         [peripheralGPIOParams.get("GPIO").get("PG7").value.get("Pin")]
+       - GPIOx : GPIOG         [peripheralGPIOParams.get("GPIO").get("PG7").value.get("GPIOx")]
+       - GPIO_PuPd : GPIO_NOPULL         [peripheralGPIOParams.get("GPIO").get("PG7").value.get("GPIO_PuPd")]
+       - Port : PG         [peripheralGPIOParams.get("GPIO").get("PG7").value.get("Port")]
+       - GPIO_Label : USB_OverCurrent [STMPS2151STR_FAULT]         [peripheralGPIOParams.get("GPIO").get("PG7").value.get("GPIO_Label")]
+       - GPIO_Pin : GPIO_PIN_7         [peripheralGPIOParams.get("GPIO").get("PG7").value.get("GPIO_Pin")]
+       - GPIO_Mode : GPIO_MODE_INPUT         [peripheralGPIOParams.get("GPIO").get("PG7").value.get("GPIO_Mode")]
+    - PB7 :
+       - GPIO_Speed : GPIO_SPEED_FREQ_LOW         [peripheralGPIOParams.get("GPIO").get("PB7").value.get("GPIO_Speed")]
+       - Pin : PB7         [peripheralGPIOParams.get("GPIO").get("PB7").value.get("Pin")]
+       - GPIOx : GPIOB         [peripheralGPIOParams.get("GPIO").get("PB7").value.get("GPIOx")]
+       - PinState : GPIO_PIN_RESET         [peripheralGPIOParams.get("GPIO").get("PB7").value.get("PinState")]
+       - GPIO_PuPd : GPIO_NOPULL         [peripheralGPIOParams.get("GPIO").get("PB7").value.get("GPIO_PuPd")]
+       - Port : PB         [peripheralGPIOParams.get("GPIO").get("PB7").value.get("Port")]
+       - GPIO_Label : LD2 [Blue]         [peripheralGPIOParams.get("GPIO").get("PB7").value.get("GPIO_Label")]
+       - GPIO_Pin : GPIO_PIN_7         [peripheralGPIOParams.get("GPIO").get("PB7").value.get("GPIO_Pin")]
+       - GPIO_ModeDefaultOutputPP : GPIO_MODE_OUTPUT_PP         [peripheralGPIOParams.get("GPIO").get("PB7").value.get("GPIO_ModeDefaultOutputPP")]
+    - PG6 :
+       - GPIO_Speed : GPIO_SPEED_FREQ_LOW         [peripheralGPIOParams.get("GPIO").get("PG6").value.get("GPIO_Speed")]
+       - Pin : PG6         [peripheralGPIOParams.get("GPIO").get("PG6").value.get("Pin")]
+       - GPIOx : GPIOG         [peripheralGPIOParams.get("GPIO").get("PG6").value.get("GPIOx")]
+       - PinState : GPIO_PIN_RESET         [peripheralGPIOParams.get("GPIO").get("PG6").value.get("PinState")]
+       - GPIO_PuPd : GPIO_NOPULL         [peripheralGPIOParams.get("GPIO").get("PG6").value.get("GPIO_PuPd")]
+       - Port : PG         [peripheralGPIOParams.get("GPIO").get("PG6").value.get("Port")]
+       - GPIO_Label : USB_PowerSwitchOn [STMPS2151STR_EN]         [peripheralGPIOParams.get("GPIO").get("PG6").value.get("GPIO_Label")]
+       - GPIO_Pin : GPIO_PIN_6         [peripheralGPIOParams.get("GPIO").get("PG6").value.get("GPIO_Pin")]
+       - GPIO_ModeDefaultOutputPP : GPIO_MODE_OUTPUT_PP         [peripheralGPIOParams.get("GPIO").get("PG6").value.get("GPIO_ModeDefaultOutputPP")]
+    - PB0 :
+       - GPIO_Speed : GPIO_SPEED_FREQ_LOW         [peripheralGPIOParams.get("GPIO").get("PB0").value.get("GPIO_Speed")]
+       - Pin : PB0         [peripheralGPIOParams.get("GPIO").get("PB0").value.get("Pin")]
+       - GPIOx : GPIOB         [peripheralGPIOParams.get("GPIO").get("PB0").value.get("GPIOx")]
+       - PinState : GPIO_PIN_RESET         [peripheralGPIOParams.get("GPIO").get("PB0").value.get("PinState")]
+       - GPIO_PuPd : GPIO_NOPULL         [peripheralGPIOParams.get("GPIO").get("PB0").value.get("GPIO_PuPd")]
+       - Port : PB         [peripheralGPIOParams.get("GPIO").get("PB0").value.get("Port")]
+       - GPIO_Label : LD1 [Green]         [peripheralGPIOParams.get("GPIO").get("PB0").value.get("GPIO_Label")]
+       - GPIO_Pin : GPIO_PIN_0         [peripheralGPIOParams.get("GPIO").get("PB0").value.get("GPIO_Pin")]
+       - GPIO_ModeDefaultOutputPP : GPIO_MODE_OUTPUT_PP         [peripheralGPIOParams.get("GPIO").get("PB0").value.get("GPIO_ModeDefaultOutputPP")]
+
+     IP paramters configuration
+    ---------------------------
+    - driver :  HAL       [peripheralParams.get("GPIO").get("driver")]
+    - Instance :  GPIO       [peripheralParams.get("GPIO").get("Instance")]

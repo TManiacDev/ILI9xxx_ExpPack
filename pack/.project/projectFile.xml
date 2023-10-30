@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<package schemaVersion="1.6.3" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="PACK.xsd">
+    <vendor>TM_Engineering</vendor>
+    <name>ILI9xxx_SPI_TFT::FROM_SCRATCH_GENERATED::CUBE_RULES</name>
+    <description>Board Support Package for SPI connected TFT display using a ILI9488 or ILI9341 driver.
+&lt;br&gt;
+Based on code from https://github.com/maudeve-it/ILI9XXX-XPT2046-STM32</description>
+    <url/>
+    <license>E:/Embedded_SourceCode/PackCreation/ILI9xxx_SPI_TFT_Driver/source/doc/license_mit.txt::license_mit.txt</license>
+    <releases>
+        <release date="2023-10-30" version="0.0.2">basic creation is working</release>
+        <release date="2023-10-30" version="0.0.1">basic setups</release>
+        <release date="2023-10-29" version="0.0.0">Initial creation of the package</release>
+    </releases>
+    <keywords>
+        <keyword>CUBE_RULES_COMPLIANT</keyword>
+        <keyword>IMPLEMENTED_WITH_STM32CUBEMX</keyword>
+    </keywords>
+    <taxonomy>
+        <description Cclass="Board Support">Board Support</description>
+    </taxonomy>
+    <components>
+        <component Cclass="Board Support" Cgroup="SPI_TFT" Csub="ILI9xxx" Cvendor="TM-Engineering" Cversion="0.0.1" maxInstances="1">
+            <description>The driver software</description>
+            <files>
+                <file category="header" name="E:/Embedded_SourceCode/PackCreation/ILI9xxx_SPI_TFT_Driver/source/src/fonts.h::Drivers/BSP/SPI_TFT/Inc/fonts.h"/>
+                <file category="header" name="E:/Embedded_SourceCode/PackCreation/ILI9xxx_SPI_TFT_Driver/source/src/z_displ_ILI9XXX.h::Drivers/BSP/SPI_TFT/Inc/z_displ_ILI9XXX.h"/>
+                <file category="source" name="E:/Embedded_SourceCode/PackCreation/ILI9xxx_SPI_TFT_Driver/source/src/font8.c::Drivers/BSP/SPI_TFT/Src/font8.c"/>
+                <file category="source" name="E:/Embedded_SourceCode/PackCreation/ILI9xxx_SPI_TFT_Driver/source/src/font12.c::Drivers/BSP/SPI_TFT/Src/font12.c"/>
+                <file category="source" name="E:/Embedded_SourceCode/PackCreation/ILI9xxx_SPI_TFT_Driver/source/src/font16.c::Drivers/BSP/SPI_TFT/Src/font16.c"/>
+                <file category="source" name="E:/Embedded_SourceCode/PackCreation/ILI9xxx_SPI_TFT_Driver/source/src/font20.c::Drivers/BSP/SPI_TFT/Src/font20.c"/>
+                <file category="source" name="E:/Embedded_SourceCode/PackCreation/ILI9xxx_SPI_TFT_Driver/source/src/font24.c::Drivers/BSP/SPI_TFT/Src/font24.c"/>
+                <file category="source" name="E:/Embedded_SourceCode/PackCreation/ILI9xxx_SPI_TFT_Driver/source/src/z_displ_ILI9XXX.c::Drivers/BSP/SPI_TFT/Src/z_displ_ILI9XXX.c"/>
+            </files>
+        </component>
+    </components>
+</package>

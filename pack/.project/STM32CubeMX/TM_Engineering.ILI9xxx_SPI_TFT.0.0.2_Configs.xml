@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<IP xmlns="http://mcd.rou.st.com/modules.php?name=mcu" xmlns:ns0="http://www.w3.org/2001/XMLSchema-instance" DBVersion="V4.0" Name="ILI9xxx_SPI_TFT" RootFolder="Packs/TM_Engineering/ILI9xxx_SPI_TFT/0.0.2/" Version="0.0.2" ns0:schemaLocation="http://mcd.rou.st.com/modules.php?name=mcu ../../../../../../../doc/V4/Development/Specifications/db/thirdPartyDb.xsd">
+    <RefConfig Name="BoardOoSupportJjSPIIiTFT">
+        <Component Name="BoardOoSupport:SPIIiTFT:ILI9xxx:$BoardOoSupportJjSPIIiTFTJjILI9xxx"/>
+        <ConfigFile Name="ILI9xxx_Config"/>
+    </RefConfig>
+    <RefConfigFile Added="true" Description="For generated configuration" Name="ILI9xxx_Config" Template="ILI9xxx_Cfg_h.ftl">
+        <File Category="header" Condition="all" Name="Target/ILI9xxx_Cfg.h"/>
+        <Argument Added="true" AddressOf="false" GenericType="simple" Name="DISPLAY_USING_TOUCHGFX" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" GenericType="simple" Name="DISPLAY_PRESCALER" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" GenericType="simple" Name="DISPLAY_BUFLEVEL" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" GenericType="simple" Name="DISPLAY_SPI_MODE" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" GenericType="simple" Name="DISPLAY_TYP" OptimizationCondition="equal"/>
+        <Argument Added="true" AddressOf="false" GenericType="simple" Name="DISPLAY_SPI_PORT" OptimizationCondition="equal"/>
+    </RefConfigFile>
+    <RefComponent Cclass="BoardOoSupport" Cgroup="SPIIiTFT" Cversion="0Gg0Gg1">
+        <SubComponent Csub="ILI9xxx" Cvariant="true" Cversion="0Gg0Gg1">
+            <File Category="header" Condition="" Name="Drivers/BSP/SPI_TFT/Inc/fonts.h"/>
+            <File Category="header" Condition="" Name="Drivers/BSP/SPI_TFT/Inc/z_displ_ILI9XXX.h"/>
+            <File Category="source" Condition="" Name="Drivers/BSP/SPI_TFT/Src/font8.c"/>
+            <File Category="source" Condition="" Name="Drivers/BSP/SPI_TFT/Src/font12.c"/>
+            <File Category="source" Condition="" Name="Drivers/BSP/SPI_TFT/Src/font16.c"/>
+            <File Category="source" Condition="" Name="Drivers/BSP/SPI_TFT/Src/font20.c"/>
+            <File Category="source" Condition="" Name="Drivers/BSP/SPI_TFT/Src/font24.c"/>
+            <File Category="source" Condition="" Name="Drivers/BSP/SPI_TFT/Src/z_displ_ILI9XXX.c"/>
+        </SubComponent>
+    </RefComponent>
+</IP>
