@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<package schemaVersion="1.6.3" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="PACK.xsd">
+<package schemaVersion="1.7.2" xmlns:xs="http://www.w3.org/2001/XMLSchema-instance" xs:noNamespaceSchemaLocation="PACK.xsd">
     <vendor>TM_Engineering</vendor>
     <name>ILI9xxx_SPI_TFT</name>
     <description>Board Support Package for SPI connected TFT display using a ILI9488 or ILI9341 driver.
@@ -8,6 +8,9 @@ Based on code from https://github.com/maudeve-it/ILI9XXX-XPT2046-STM32</descript
     <url/>
     <license>license_mit.txt</license>
     <releases>
+        <release date="2023-10-30" version="0.0.5">Create an example application</release>
+        <release date="2023-10-30" version="0.0.4">Using BSP platform dependencies for SPI</release>
+        <release date="2023-10-30" version="0.0.3">Start with board dependencies</release>
         <release date="2023-10-30" version="0.0.2">basic creation is working</release>
         <release date="2023-10-30" version="0.0.1">basic setups</release>
         <release date="2023-10-29" version="0.0.0">Initial creation of the package</release>
@@ -17,8 +20,15 @@ Based on code from https://github.com/maudeve-it/ILI9XXX-XPT2046-STM32</descript
         <keyword>IMPLEMENTED_WITH_STM32CUBEMX</keyword>
     </keywords>
     <taxonomy>
+        <description Cclass="Device">Device</description>
         <description Cclass="Board Support">Board Support</description>
     </taxonomy>
+    <conditions>
+        <condition id="has_boardSupport">
+            <description>We need the connection for the application</description>
+            <accept Cclass="Board Support" Cgroup="SPI_TFT"/>
+        </condition>
+    </conditions>
     <components>
         <component Cclass="Board Support" Cgroup="SPI_TFT" Csub="ILI9xxx" Cvendor="TM-Engineering" Cversion="0.0.1" maxInstances="1">
             <description>The driver software</description>
@@ -31,6 +41,12 @@ Based on code from https://github.com/maudeve-it/ILI9XXX-XPT2046-STM32</descript
                 <file category="source" name="Drivers/BSP/SPI_TFT/Src/font20.c"/>
                 <file category="source" name="Drivers/BSP/SPI_TFT/Src/font24.c"/>
                 <file category="source" name="Drivers/BSP/SPI_TFT/Src/z_displ_ILI9XXX.c"/>
+            </files>
+        </component>
+        <component Cclass="Device" Cgroup="Application" Cvariant="HelloWorld" Cversion="0.0.1" condition="has_boardSupport" isDefaultVariant="true" maxInstances="1">
+            <description>A simple Hello World on TFT display application</description>
+            <files>
+                <file category="doc" name="Projects/HelloWorld/Applications/HelloWorld/HelloWorld.txt"/>
             </files>
         </component>
     </components>

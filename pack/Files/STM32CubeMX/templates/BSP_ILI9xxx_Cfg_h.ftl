@@ -130,15 +130,6 @@ extern ${variable.value} ${variable.name};
 #define ${Display_Type}
 
 
-/******************    STEP 3    ******************
- **************** PORT PARAMETERS *****************
- ** properly set the below th 2 defines to address
- ********  the SPI port defined on CubeMX *********
- **************************************************/
-#define DISPL_SPI_PORT 	${Display_Port_Handle}
-#define DISPL_SPI 		  ${Display_Port}
-
-
 /******************    STEP 4     ******************
  ***************** SPI PORT SPEED  *****************
  * define HERE the prescaler value to assign SPI port 

@@ -34,14 +34,6 @@
 #ifndef __Z_DISPL_ILI9XXX_H
 #define __Z_DISPL_ILI9XXX_H
 
-
-/*||||||||||| USER/PROJECT PARAMETERS |||||||||||*/
-
-#include "ILI9xxx_Cfg.h"
-
-/*|||||||| END OF USER/PROJECT PARAMETERS ||||||||*/
-
-
 /*|||||||||||||| DEVICE PARAMETERS |||||||||||||||||*/
 /* you shouldn't need to change anything here after */
 
