@@ -8,6 +8,7 @@ Based on code from https://github.com/maudeve-it/ILI9XXX-XPT2046-STM32</descript
     <url/>
     <license>Z:/GIT_Repro/ILI9xxx_ExpPack/source/doc/license_mit.txt::license_mit.txt</license>
     <releases>
+        <release date="2023-10-30" version="0.0.6">Configuration of GPIOs</release>
         <release date="2023-10-30" version="0.0.5">Create an example application</release>
         <release date="2023-10-30" version="0.0.4">Using BSP platform dependencies for SPI</release>
         <release date="2023-10-30" version="0.0.3">Start with board dependencies</release>

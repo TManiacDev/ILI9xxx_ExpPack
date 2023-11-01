@@ -23,9 +23,11 @@
 #ifndef __${inclusion_protection}__
 #define __${inclusion_protection}__
 
+[#assign UserCodeCounter = 0]
+
 [#assign IpInstance = ""]
 [#assign IpName = ""]
- 
+
 [#list BspIpDatas as SWIP] 
     [#if SWIP.variables??]
         [#list SWIP.variables as variables]
@@ -41,11 +43,28 @@
             [/#if]
         [/#list]
     [/#if]
-[/#list] 
-
+    [#switch SWIP.ipName]
+      [#case "BSP SPI"]
 [#assign Display_Port_Handle = "h" + IpInstance?lower_case ]
 [#assign Display_Port = IpInstance ]
-        
+        [#break]
+      [#case "Display CS"]
+[#assign Display_CS_Pin = IpInstance ]
+[#assign Display_CS_Port = IpName ]
+        [#break]
+      [#case "Display DC"]
+[#assign Display_DC_Pin = IpInstance ]
+[#assign Display_DC_Port = IpName ]
+        [#break]
+      [#case "Display Backlight"]
+[#assign Display_BL_Pin = IpInstance ]
+[#assign Display_BL_Port = IpName ]
+        [#break]
+      [#default]
+        [#break]
+    [/#switch] [#-- endof switch ipName --]
+[/#list] 
+
 #ifdef __cplusplus
  extern "C" {
 #endif 
@@ -53,21 +72,61 @@
 /* Includes ------------------------------------------------------------------*/ 
 #include "fonts.h"
 
+/* private Includes -----------------------------------------------------------*/
+/* USER CODE BEGIN ${dashedFileNamed} ${UserCodeCounter} */
+
+/* USER CODE END ${dashedFileNamed} ${UserCodeCounter} */
+  [#assign UserCodeCounter++]
+  
 /*||||||||||| USER/PROJECT PARAMETERS |||||||||||*/
 #include "BSP_ILI9xxx_Cfg.h"
 /*|||||||| END OF USER/PROJECT PARAMETERS ||||||||*/
 
+[#if Display_Port_Handle??]
 /*************    BSP Connection    ***************
- **************** PORT PARAMETERS *****************
+ ************* SPI PORT PARAMETERS *****************
  ** properly set the below th 2 defines to address
  ********  the SPI port defined on CubeMX *********
  **************************************************/
 #define DISPL_SPI_PORT 	${Display_Port_Handle}
 #define DISPL_SPI 		  ${Display_Port}
+[/#if]     
 
-#include "z_displ_ILI9xxx.h"
+/*************** GPIO Connection ******************/
+[#if Display_CS_Pin??]
+/************* Display Chip Select ****************/
+#define DISPL_CS_Pin          ${Display_CS_Pin}
+#define DISPL_CS_GPIO_Port    ${Display_CS_Port}
+[/#if]
+
+[#if Display_DC_Pin??]
+/************ Display Data/Command ****************/
+#define DISPL_DC_Pin          ${Display_DC_Pin}
+#define DISPL_DC_GPIO_Port    ${Display_DC_Port}
+[/#if]
+
+[#if Display_BL_Pin??]
+/************ Display Backlight ****************/
+#define DISPL_BL_Pin          ${Display_BL_Pin}
+#define DISPL_BL_GPIO_Port    ${Display_BL_Port}
+[/#if]
+
+/* private Defines -----------------------------------------------------------*/
+/* USER CODE BEGIN ${dashedFileNamed} ${UserCodeCounter} */
+
+/* USER CODE END ${dashedFileNamed} ${UserCodeCounter} */
+  [#assign UserCodeCounter++]
   
+/************* Include the old header *************/
+/******   this header needs defines above *********/
+#include "z_displ_ILI9xxx.h"
 
+/* private Includes -----------------------------------------------------------*/
+/* USER CODE BEGIN ${dashedFileNamed} ${UserCodeCounter} */
+
+/* USER CODE END ${dashedFileNamed} ${UserCodeCounter} */
+  [#assign UserCodeCounter++]
+  
 #ifdef __cplusplus
 }
 #endif

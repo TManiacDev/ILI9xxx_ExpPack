@@ -117,7 +117,9 @@ extern ${variable.value} ${variable.name};
  * functions interfacing TouchGFX
  ***************************************************/
 [#if USE_TOUCHGFX??]
-[#else]//#define DISPLAY_USING_TOUCHGFX
+#define DISPLAY_USING_TOUCHGFX
+[#else]
+//#define DISPLAY_USING_TOUCHGFX
 [/#if]
 
 

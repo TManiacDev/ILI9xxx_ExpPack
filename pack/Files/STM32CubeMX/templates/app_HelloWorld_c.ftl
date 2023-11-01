@@ -38,6 +38,8 @@
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
 
+#define FIRST_COLOR     CYAN
+#define SECOND_COLOR    RED
 
 /* USER CODE END PD */
 
@@ -98,11 +100,11 @@ void ${fctProcessName}(void)
     x=a % (_width-11) ;
     y=b % (_height-18) ;
     c=a % 26+'A';
-    Displ_WChar(x, y, c, Font16, 1, GREEN, RED);
+    Displ_WChar(x, y, c, Font16, 1, FIRST_COLOR, SECOND_COLOR);
     x=b % (_width-11) ;
     y=a % (_height-18) ;
     c=b % 26+'A';
-    Displ_WChar(x, y, c, Font16, 1, RED, GREEN);
+    Displ_WChar(x, y, c, Font16, 1, SECOND_COLOR, FIRST_COLOR);
     HAL_Delay(100);
   }
   
