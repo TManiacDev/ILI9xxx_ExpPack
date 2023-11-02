@@ -138,7 +138,7 @@ extern ${variable.value} ${variable.name};
  * when transferring data to/from DISPLAY or TOUCH
  * Keep in mind that Touch SPI Baudrate should be no more than 1 Mbps
  ***************************************************/
-#define DISPL_PRESCALER SPI_BAUDRATEPRESCALER_${Display_Prescaler}     //prescaler assigned to display SPI port
+#define DISPL_PRESCALER SPI_BAUDRATE${Display_Prescaler}     //prescaler assigned to display SPI port
 
 
 /*****************     STEP 5      *****************

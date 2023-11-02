@@ -158,10 +158,12 @@ void Displ_WriteData(uint8_t* buff, size_t buff_size, uint8_t isTouchGFXBuffer){
 void ILI9XXX_Init(){
 	Displ_Select();
 
+#ifdef DISPL_RST_PIN
 	HAL_GPIO_WritePin(DISPL_RST_GPIO_Port, DISPL_RST_Pin, GPIO_PIN_RESET);
 	HAL_Delay(1);
 	HAL_GPIO_WritePin(DISPL_RST_GPIO_Port, DISPL_RST_Pin, GPIO_PIN_SET);
 	HAL_Delay(150);
+#endif
 
 /******************************************
  * below lines shlould empower brightness

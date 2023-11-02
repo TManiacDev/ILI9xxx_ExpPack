@@ -56,6 +56,10 @@
 [#assign Display_DC_Pin = IpInstance ]
 [#assign Display_DC_Port = IpName ]
         [#break]
+      [#case "Display Reset"]
+[#assign Display_RST_Pin = IpInstance ]
+[#assign Display_RST_Port = IpName ]
+        [#break]
       [#case "Display Backlight"]
 [#assign Display_BL_Pin = IpInstance ]
 [#assign Display_BL_Port = IpName ]
@@ -105,10 +109,20 @@
 #define DISPL_DC_GPIO_Port    ${Display_DC_Port}
 [/#if]
 
-[#if Display_BL_Pin??]
+/************ Display Reset ****************/
+[#if Display_RST_Pin??]
+#define DISPL_RST_Pin          ${Display_RST_Pin}
+#define DISPL_RST_GPIO_Port    ${Display_RST_Port}
+[#else]
+#define DISPL_WITHOUT_RST
+[/#if]
+
 /************ Display Backlight ****************/
+[#if Display_BL_Pin??]
 #define DISPL_BL_Pin          ${Display_BL_Pin}
 #define DISPL_BL_GPIO_Port    ${Display_BL_Port}
+[#else]
+#define DISPL_WITHOUT_BACKLIGHT
 [/#if]
 
 /* private Defines -----------------------------------------------------------*/

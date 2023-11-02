@@ -8,6 +8,8 @@ Based on code from https://github.com/maudeve-it/ILI9XXX-XPT2046-STM32</descript
     <url/>
     <license>license_mit.txt</license>
     <releases>
+        <release date="2023-11-01" version="0.0.7">Switch components to bundles
+So we can handle different platform settings</release>
         <release date="2023-10-30" version="0.0.6">Configuration of GPIOs</release>
         <release date="2023-10-30" version="0.0.5">Create an example application</release>
         <release date="2023-10-30" version="0.0.4">Using BSP platform dependencies for SPI</release>
@@ -21,6 +23,7 @@ Based on code from https://github.com/maudeve-it/ILI9XXX-XPT2046-STM32</descript
         <keyword>IMPLEMENTED_WITH_STM32CUBEMX</keyword>
     </keywords>
     <taxonomy>
+        <description Cclass="Board Part">Board Part</description>
         <description Cclass="Device">Device</description>
         <description Cclass="Board Support">Board Support</description>
     </taxonomy>
@@ -50,5 +53,61 @@ Based on code from https://github.com/maudeve-it/ILI9XXX-XPT2046-STM32</descript
                 <file category="doc" name="Projects/HelloWorld/Applications/HelloWorld/HelloWorld.txt"/>
             </files>
         </component>
+        <bundle Cbundle="DISPLAY" Cclass="Board Part" Cversion="0.0.1">
+            <description>This bundle holds the parts needed to handle components on a DISPLAY</description>
+            <doc>doc/license_mit.txt</doc>
+            <component Cgroup="LCD" Csub="ILI9xxx" Cvariant="SPI_only" maxInstances="1">
+                <description>Select a board with SPI only (no back light or reset control)</description>
+                <files>
+                    <file category="header" name="Drivers/BSP/Components/ILI9xxx/Inc/fonts.h"/>
+                    <file category="header" name="Drivers/BSP/Components/ILI9xxx/Inc/z_displ_ILI9XXX.h"/>
+                    <file category="source" name="Drivers/BSP/Components/ILI9xxx/Src/font8.c"/>
+                    <file category="source" name="Drivers/BSP/Components/ILI9xxx/Src/font12.c"/>
+                    <file category="source" name="Drivers/BSP/Components/ILI9xxx/Src/font16.c"/>
+                    <file category="source" name="Drivers/BSP/Components/ILI9xxx/Src/font20.c"/>
+                    <file category="source" name="Drivers/BSP/Components/ILI9xxx/Src/font24.c"/>
+                    <file category="source" name="Drivers/BSP/Components/ILI9xxx/Src/z_displ_ILI9XXX.c"/>
+                </files>
+            </component>
+            <component Cgroup="LCD" Csub="ILI9xxx" Cvariant="SPI_wReset" maxInstances="1">
+                <description>Select a board with SPI plus reset control</description>
+                <files>
+                    <file category="header" name="Drivers/BSP/Components/ILI9xxx/Inc/fonts.h"/>
+                    <file category="header" name="Drivers/BSP/Components/ILI9xxx/Inc/z_displ_ILI9XXX.h"/>
+                    <file category="source" name="Drivers/BSP/Components/ILI9xxx/Src/font8.c"/>
+                    <file category="source" name="Drivers/BSP/Components/ILI9xxx/Src/font12.c"/>
+                    <file category="source" name="Drivers/BSP/Components/ILI9xxx/Src/font16.c"/>
+                    <file category="source" name="Drivers/BSP/Components/ILI9xxx/Src/font20.c"/>
+                    <file category="source" name="Drivers/BSP/Components/ILI9xxx/Src/font24.c"/>
+                    <file category="source" name="Drivers/BSP/Components/ILI9xxx/Src/z_displ_ILI9XXX.c"/>
+                </files>
+            </component>
+            <component Cgroup="LCD" Csub="ILI9xxx" Cvariant="SPI_wBackLight" maxInstances="1">
+                <description>Select a board with SPI plus back light control</description>
+                <files>
+                    <file category="header" name="Drivers/BSP/Components/ILI9xxx/Inc/fonts.h"/>
+                    <file category="header" name="Drivers/BSP/Components/ILI9xxx/Inc/z_displ_ILI9XXX.h"/>
+                    <file category="source" name="Drivers/BSP/Components/ILI9xxx/Src/font8.c"/>
+                    <file category="source" name="Drivers/BSP/Components/ILI9xxx/Src/font12.c"/>
+                    <file category="source" name="Drivers/BSP/Components/ILI9xxx/Src/font16.c"/>
+                    <file category="source" name="Drivers/BSP/Components/ILI9xxx/Src/font20.c"/>
+                    <file category="source" name="Drivers/BSP/Components/ILI9xxx/Src/font24.c"/>
+                    <file category="source" name="Drivers/BSP/Components/ILI9xxx/Src/z_displ_ILI9XXX.c"/>
+                </files>
+            </component>
+            <component Cgroup="LCD" Csub="ILI9xxx" Cvariant="SPI_wAll" maxInstances="1">
+                <description>Select a board with SPI plus back light and reset control</description>
+                <files>
+                    <file category="header" name="Drivers/BSP/Components/ILI9xxx/Inc/fonts.h"/>
+                    <file category="header" name="Drivers/BSP/Components/ILI9xxx/Inc/z_displ_ILI9XXX.h"/>
+                    <file category="source" name="Drivers/BSP/Components/ILI9xxx/Src/font8.c"/>
+                    <file category="source" name="Drivers/BSP/Components/ILI9xxx/Src/font12.c"/>
+                    <file category="source" name="Drivers/BSP/Components/ILI9xxx/Src/font16.c"/>
+                    <file category="source" name="Drivers/BSP/Components/ILI9xxx/Src/font20.c"/>
+                    <file category="source" name="Drivers/BSP/Components/ILI9xxx/Src/font24.c"/>
+                    <file category="source" name="Drivers/BSP/Components/ILI9xxx/Src/z_displ_ILI9XXX.c"/>
+                </files>
+            </component>
+        </bundle>
     </components>
 </package>

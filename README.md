@@ -14,7 +14,7 @@ This pack is for the display only, there will be a second pack for the touch con
 ## Small changes against the based
 + Rework for independency to the touch panel
 + Removed timer dependencies for polling only mode (without TouchGFX)
-+ If no back light isused, this will build without configuration needed.
++ If no back light is used, this will build without configuration needed.
 
 ## This isn't a compilable project at all
 The including code is to build the ExpansionPack with the **STM32PackCreator**.  
