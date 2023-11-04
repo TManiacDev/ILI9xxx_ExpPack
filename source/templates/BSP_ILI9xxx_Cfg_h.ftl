@@ -29,8 +29,6 @@
  extern "C" {
 #endif
 
-#include "main.h"
-
 /* private Includes -----------------------------------------------------------*/
 /* USER CODE BEGIN ${dashedFileNamed} ${UserCodeCounter} */
 
@@ -111,19 +109,7 @@ extern ${variable.value} ${variable.name};
 /* USER CODE END ${dashedFileNamed} ${UserCodeCounter} */
   [#assign UserCodeCounter++]
 
-/*****************     STEP 1      *****************
- ************ Enable TouchGFX interface ************
- * uncommenting the below #define to enable
- * functions interfacing TouchGFX
- ***************************************************/
-[#if USE_TOUCHGFX??]
-#define DISPLAY_USING_TOUCHGFX
-[#else]
-//#define DISPLAY_USING_TOUCHGFX
-[/#if]
-
-
-/******************    STEP 2    *****************
+/*************    Display Type    *****************
  * which display are you using?
  * ILI9341
  * ILI9488_V1
@@ -132,8 +118,7 @@ extern ${variable.value} ${variable.name};
 #define ${Display_Type}
 
 
-/******************    STEP 4     ******************
- ***************** SPI PORT SPEED  *****************
+/***************** SPI PORT SPEED  *****************
  * define HERE the prescaler value to assign SPI port 
  * when transferring data to/from DISPLAY or TOUCH
  * Keep in mind that Touch SPI Baudrate should be no more than 1 Mbps
@@ -141,8 +126,7 @@ extern ${variable.value} ${variable.name};
 #define DISPL_PRESCALER SPI_BAUDRATE${Display_Prescaler}     //prescaler assigned to display SPI port
 
 
-/*****************     STEP 5      *****************
- ************* SPI COMMUNICATION MODE **************
+/************* SPI COMMUNICATION MODE **************
  *** enable SPI mode want, uncommenting ONE row ****
  **** (Setup the same configuration on CubeMX) *****
  * DISPLAY_SPI_POLLING_MODE
@@ -151,8 +135,8 @@ extern ${variable.value} ${variable.name};
  ***************************************************/
  #define DISPLAY_SPI_${Display_SPI_Mode}
 
-/*****************     STEP 6      *****************
- ***************** Backlight timer *****************
+
+/***************** Backlight timer *****************
  * if you want dimming backlight UNCOMMENT the
  * DISPLAY_DIMMING_MODE below define and properly
  * set other defines.
@@ -176,8 +160,15 @@ extern ${variable.value} ${variable.name};
 #define BKLIT_INIT_LEVEL 			100				//Display backlight level on startup
 
 
-/*****************     STEP 7      *****************
- ***************** TouchGFX Time base timer *****************
+[#if USE_TOUCHGFX??]
+/************ Enable TouchGFX interface ************
+ * uncommenting the below #define to enable
+ * functions interfacing TouchGFX
+ ***************************************************/
+#define DISPLAY_USING_TOUCHGFX
+
+
+/***************** TouchGFX Time base timer *****************
  * If using library in TouchGFX-full-mode
  * (see GitHub page indicated on top for details)
  * you have to set #define DELAY_TO_KEY_REPEAT -1
@@ -191,10 +182,10 @@ extern ${variable.value} ${variable.name};
  ***************************************************/
 #define TGFX_TIMER			TIM3
 #define TGFX_T				htim3
+[/#if]
 
 
-/*****************     STEP 8      *****************
- ************* frame buffer DEFINITION *************
+/************* frame buffer DEFINITION *************
  * IF NO TOUCHGFX: 
  * BUFLEVEL defines size of each one of the 2 SPI 
  * buffers: buffer size is 2^BUFLEVEL so 2 means 

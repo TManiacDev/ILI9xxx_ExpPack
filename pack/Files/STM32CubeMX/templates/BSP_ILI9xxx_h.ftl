@@ -5,6 +5,8 @@
   * @file  : ${fileName}.h
   * @brief : header file for the BSP SPI TFT display
   *
+  * This file holds the the generated hardware depencies
+  *
   [#assign aDateTime = .now]
   [#assign aDate = aDateTime?date]
   [#assign aTime = aDateTime?time]
@@ -44,15 +46,15 @@
         [/#list]
     [/#if]
     [#switch SWIP.ipName]
-      [#case "BSP SPI"]
+      [#case "SPI"]
 [#assign Display_Port_Handle = "h" + IpInstance?lower_case ]
 [#assign Display_Port = IpInstance ]
         [#break]
-      [#case "Display CS"]
+      [#case "Chip Select"]
 [#assign Display_CS_Pin = IpInstance ]
 [#assign Display_CS_Port = IpName ]
         [#break]
-      [#case "Display DC"]
+      [#case "Data Command"]
 [#assign Display_DC_Pin = IpInstance ]
 [#assign Display_DC_Port = IpName ]
         [#break]
@@ -60,7 +62,7 @@
 [#assign Display_RST_Pin = IpInstance ]
 [#assign Display_RST_Port = IpName ]
         [#break]
-      [#case "Display Backlight"]
+      [#case "Backlight Switch"]
 [#assign Display_BL_Pin = IpInstance ]
 [#assign Display_BL_Port = IpName ]
         [#break]
@@ -92,6 +94,7 @@
  ** properly set the below th 2 defines to address
  ********  the SPI port defined on CubeMX *********
  **************************************************/
+#define DISPLAY_USING_TOUCHGFX
 #define DISPL_SPI_PORT 	${Display_Port_Handle}
 #define DISPL_SPI 		  ${Display_Port}
 [/#if]     

@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<IP xmlns="http://mcd.rou.st.com/modules.php?name=mcu" xmlns:ns0="http://www.w3.org/2001/XMLSchema-instance" CodeTemplate="app_ILI9xxx_SPI_TFT_h.ftl" DBVersion="V4.0" Name="ILI9xxx_SPI_TFT" RootFolder="Packs/TM_Engineering/ILI9xxx_SPI_TFT/0.0.7/" Version="0.0.7" ns0:schemaLocation="http://mcd.rou.st.com/modules.php?name=mcu ../../../../../../../doc/V4/Development/Specifications/db/thirdPartyDb.xsd">
-    <RefConfig Name="BoardOoSupportJjSPIIiTFT">
-        <Component Name="BoardOoSupport:SPIIiTFT:ILI9xxx:$BoardOoSupportJjSPIIiTFTJjILI9xxx"/>
-    </RefConfig>
+<IP xmlns="http://mcd.rou.st.com/modules.php?name=mcu" xmlns:ns0="http://www.w3.org/2001/XMLSchema-instance" CodeTemplate="app_ILI9xxx_SPI_TFT_h.ftl" DBVersion="V4.0" Name="ILI9xxx_SPI_TFT" RootFolder="Packs/TM_Engineering/ILI9xxx_SPI_TFT/0.0.8/" Version="0.0.8" ns0:schemaLocation="http://mcd.rou.st.com/modules.php?name=mcu ../../../../../../../doc/V4/Development/Specifications/db/thirdPartyDb.xsd">
     <RefConfig Name="DeviceJjApplication">
         <Component Name="Device:Application:HelloWorld:$DeviceJjApplication"/>
         <ConfigFile Name="APP_HELLOWORLD_C"/>
@@ -12,6 +9,7 @@
         <Component Name="DISPLAYCcBoardOoPart:LCD:ILI9xxx:SPIIiwReset:$DISPLAYCcBoardOoPartJjLCDJjILI9xxx"/>
         <Component Name="DISPLAYCcBoardOoPart:LCD:ILI9xxx:SPIIiwBackLight:$DISPLAYCcBoardOoPartJjLCDJjILI9xxx"/>
         <Component Name="DISPLAYCcBoardOoPart:LCD:ILI9xxx:SPIIiwAll:$DISPLAYCcBoardOoPartJjLCDJjILI9xxx"/>
+        <Component Name="DISPLAYCcBoardOoPart:Support:TouchGFXOoSupport:$DISPLAYCcBoardOoPartJjSupportJjTouchGFXOoSupport"/>
         <ConfigFile Name="ILI9xxx_Config"/>
     </RefConfig>
     <RefConfigFile Added="true" Description="Implementation of a simple Hello World" Name="APP_HELLOWORLD_C" Template="app_HelloWorld_c.ftl">
@@ -25,54 +23,30 @@
         <Argument Added="true" AddressOf="false" Comment="Select the type of display" GenericType="simple" Name="DISPLAY_TYP" OptimizationCondition="equal"/>
         <Argument Added="true" AddressOf="false" Comment="Size of the transmit buffer" GenericType="simple" Name="DISPLAY_BUFLEVEL" OptimizationCondition="equal"/>
     </RefConfigFile>
-    <RefBspComponent BspIpName="SPI" BspModeName="Full-Duplex Master" Name="BSP SPI">
+    <RefBspComponent BspIpName="SPI" BspModeName="Full-Duplex Master" Name="SPI">
         <File Category="template" Condition="all" Name="./BSP_ILI9xxx_h.ftl" attr="config"/>
     </RefBspComponent>
-    <RefBspComponent BspIpName="SPI" BspModeName="Half-Duplex Master" Name="BSP SPI">
+    <RefBspComponent BspIpName="SPI" BspModeName="Half-Duplex Master" Name="SPI">
         <File Category="template" Condition="all" Name="./BSP_ILI9xxx_h.ftl" attr="config"/>
     </RefBspComponent>
-    <RefBspComponent BspIpName="SPI" BspModeName="Transmit Only Master" Name="BSP SPI">
+    <RefBspComponent BspIpName="SPI" BspModeName="Transmit Only Master" Name="SPI">
         <File Category="template" Condition="all" Name="./BSP_ILI9xxx_h.ftl" attr="config"/>
     </RefBspComponent>
-    <RefBspComponent BspIpName="GPIO" BspModeName="Output" Name="Display CS">
+    <RefBspComponent BspIpName="GPIO" BspModeName="Output" Name="Chip Select">
         <File Category="template" Condition="all" Name="./BSP_ILI9xxx_h.ftl" attr="config"/>
     </RefBspComponent>
-    <RefBspComponent BspIpName="GPIO" BspModeName="Output" Name="Display DC">
+    <RefBspComponent BspIpName="GPIO" BspModeName="Output" Name="Data Command">
         <File Category="template" Condition="all" Name="./BSP_ILI9xxx_h.ftl" attr="config"/>
     </RefBspComponent>
-    <RefBspComponent BspIpName="GPIO" BspModeName="Output" Name="Display Backlight">
+    <RefBspComponent BspIpName="GPIO" BspModeName="Output" Name="Backlight Switch">
         <File Category="template" Condition="all" Name="./BSP_ILI9xxx_h.ftl"/>
     </RefBspComponent>
     <RefBspComponent BspIpName="GPIO" BspModeName="Output" Name="Display Reset">
         <File Category="template" Condition="all" Name="./BSP_ILI9xxx_h.ftl"/>
     </RefBspComponent>
-    <RefBspComponent BspIpName="TIM.*" BspModeName="Internal Clock" Name="TouchGFX Timer">
+    <RefBspComponent BspIpName="TIM.*" BspModeName=".*Enable.*" Name="Sync Timer">
         <File Category="template" Condition="all" Name="./BSP_ILI9xxx_h.ftl"/>
     </RefBspComponent>
-    <RefBspComponent BspIpName="TIM.*" BspModeName="Test Enable" Name="TouchGFX Timer">
-        <File Category="template" Condition="all" Name="./BSP_ILI9xxx_h.ftl"/>
-    </RefBspComponent>
-    <RefBspComponent BspIpName="TIM.*" BspModeName="Enable_Timer" Name="TouchGFX Timer">
-        <File Category="template" Condition="all" Name="./BSP_ILI9xxx_h.ftl"/>
-    </RefBspComponent>
-    <RefBspComponent BspIpName="TIM1_8" BspModeName="Output Compare No Output" Name="TouchGFX Timer">
-        <File Category="template" Condition="all" Name="./BSP_ILI9xxx_h.ftl"/>
-    </RefBspComponent>
-    <RefBspComponent BspIpName="TIM1_8" BspModeName="XOR ON / Hall Sensor Mode" Name="TouchGFX Timer">
-        <File Category="template" Condition="all" Name="./BSP_ILI9xxx_h.ftl"/>
-    </RefBspComponent>
-    <RefComponent Cclass="BoardOoSupport" Cgroup="SPIIiTFT" Cversion="0Gg0Gg1">
-        <SubComponent Csub="ILI9xxx" Cvariant="true" Cversion="0Gg0Gg1">
-            <File Category="header" Condition="" Name="Drivers/BSP/SPI_TFT/Inc/fonts.h"/>
-            <File Category="header" Condition="" Name="Drivers/BSP/SPI_TFT/Inc/z_displ_ILI9XXX.h"/>
-            <File Category="source" Condition="" Name="Drivers/BSP/SPI_TFT/Src/font8.c"/>
-            <File Category="source" Condition="" Name="Drivers/BSP/SPI_TFT/Src/font12.c"/>
-            <File Category="source" Condition="" Name="Drivers/BSP/SPI_TFT/Src/font16.c"/>
-            <File Category="source" Condition="" Name="Drivers/BSP/SPI_TFT/Src/font20.c"/>
-            <File Category="source" Condition="" Name="Drivers/BSP/SPI_TFT/Src/font24.c"/>
-            <File Category="source" Condition="" Name="Drivers/BSP/SPI_TFT/Src/z_displ_ILI9XXX.c"/>
-        </SubComponent>
-    </RefComponent>
     <RefComponent Cclass="Device" Cgroup="Application" Cversion="0Gg0Gg1">
         <SubComponent Csub="" Cvariant="HelloWorld:HelloWorld" ModuleName="HelloWorld">
             <File Category="doc" Condition="" Name="Projects/HelloWorld/Applications/HelloWorld/HelloWorld.txt"/>
@@ -119,5 +93,8 @@
             <File Category="source" Condition="" Name="Drivers/BSP/Components/ILI9xxx/Src/font24.c"/>
             <File Category="source" Condition="" Name="Drivers/BSP/Components/ILI9xxx/Src/z_displ_ILI9XXX.c"/>
         </SubComponent>
+    </RefComponent>
+    <RefComponent Cclass="DISPLAYCcBoardOoPart" Cgroup="Support" Cversion="0Gg0Gg1">
+        <SubComponent Csub="TouchGFXOoSupport" Cvariant="true" Cversion="0Gg0Gg1"/>
     </RefComponent>
 </IP>

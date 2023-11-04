@@ -8,6 +8,7 @@ Based on code from https://github.com/maudeve-it/ILI9XXX-XPT2046-STM32</descript
     <url/>
     <license>Z:/GIT_Repro/ILI9xxx_ExpPack/source/doc/license_mit.txt::license_mit.txt</license>
     <releases>
+        <release date="2023-11-02" version="0.0.8">Integration of TouchGFX Timer and Backlight PWM</release>
         <release date="2023-11-01" version="0.0.7">Switch components to bundles
 So we can handle different platform settings</release>
         <release date="2023-10-30" version="0.0.6">Configuration of GPIOs</release>
@@ -25,28 +26,14 @@ So we can handle different platform settings</release>
     <taxonomy>
         <description Cclass="Board Part">Board Part</description>
         <description Cclass="Device">Device</description>
-        <description Cclass="Board Support">Board Support</description>
     </taxonomy>
     <conditions>
         <condition id="has_boardSupport">
             <description>We need the connection for the application</description>
-            <accept Cclass="Board Support" Cgroup="SPI_TFT"/>
+            <accept Cclass="Board Part" Cgroup="LCD" Csub="ILI9xxx"/>
         </condition>
     </conditions>
     <components>
-        <component Cclass="Board Support" Cgroup="SPI_TFT" Csub="ILI9xxx" Cvendor="TM-Engineering" Cversion="0.0.1" maxInstances="1">
-            <description>The driver software</description>
-            <files>
-                <file category="header" name="Z:/GIT_Repro/ILI9xxx_ExpPack/source/src/fonts.h::Drivers/BSP/SPI_TFT/Inc/fonts.h"/>
-                <file category="header" name="Z:/GIT_Repro/ILI9xxx_ExpPack/source/src/z_displ_ILI9XXX.h::Drivers/BSP/SPI_TFT/Inc/z_displ_ILI9XXX.h"/>
-                <file category="source" name="Z:/GIT_Repro/ILI9xxx_ExpPack/source/src/font8.c::Drivers/BSP/SPI_TFT/Src/font8.c"/>
-                <file category="source" name="Z:/GIT_Repro/ILI9xxx_ExpPack/source/src/font12.c::Drivers/BSP/SPI_TFT/Src/font12.c"/>
-                <file category="source" name="Z:/GIT_Repro/ILI9xxx_ExpPack/source/src/font16.c::Drivers/BSP/SPI_TFT/Src/font16.c"/>
-                <file category="source" name="Z:/GIT_Repro/ILI9xxx_ExpPack/source/src/font20.c::Drivers/BSP/SPI_TFT/Src/font20.c"/>
-                <file category="source" name="Z:/GIT_Repro/ILI9xxx_ExpPack/source/src/font24.c::Drivers/BSP/SPI_TFT/Src/font24.c"/>
-                <file category="source" name="Z:/GIT_Repro/ILI9xxx_ExpPack/source/src/z_displ_ILI9XXX.c::Drivers/BSP/SPI_TFT/Src/z_displ_ILI9XXX.c"/>
-            </files>
-        </component>
         <component Cclass="Device" Cgroup="Application" Cvariant="HelloWorld" Cversion="0.0.1" condition="has_boardSupport" isDefaultVariant="true" maxInstances="1">
             <description>A simple Hello World on TFT display application</description>
             <files>
@@ -107,6 +94,10 @@ So we can handle different platform settings</release>
                     <file category="source" name="Z:/GIT_Repro/ILI9xxx_ExpPack/source/src/font24.c::Drivers/BSP/Components/ILI9xxx/Src/font24.c"/>
                     <file category="source" name="Z:/GIT_Repro/ILI9xxx_ExpPack/source/src/z_displ_ILI9XXX.c::Drivers/BSP/Components/ILI9xxx/Src/z_displ_ILI9XXX.c"/>
                 </files>
+            </component>
+            <component Cgroup="Support" Csub="TouchGFX Support" condition="has_boardSupport" maxInstances="1">
+                <description>Setup Display sync routines</description>
+                <files/>
             </component>
         </bundle>
     </components>
