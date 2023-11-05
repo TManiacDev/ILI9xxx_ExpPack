@@ -1,9 +1,8 @@
 [#ftl]
 /**
   ******************************************************************************
-  * File Name          : ${name}
-  * Description        : This file provides code for the configuration
-  *                      of the ${name} instances.
+  * @file         ${name}
+  * @brief  This file provides code for the configuration  of the ${name} instances.
   *
   [#assign aDateTime = .now]
   [#assign aDate = aDateTime?date]
@@ -35,18 +34,19 @@
 /* USER CODE END ${dashedFileNamed} ${UserCodeCounter} */
   [#assign UserCodeCounter++]
 
-/*******************************/
 [#-- SWIPdatas is a list of SWIPconfigModel --]  
 [#list SWIPdatas as SWIP]  
 [#assign instName = SWIP.ipName]   
 [#assign fileName = SWIP.fileName]   
-[#assign version = SWIP.version]   
-/** @file
-	MiddleWare name : ${instName}
-	MiddleWare fileName : ${fileName}
-	MiddleWare version : ${version}
-*/
-/*******************************/
+[#assign version = SWIP.version]  
+[#assign manufactureName =  instName?keep_before(".")]
+[#assign packageString =  instName?keep_after(".")]
+/** *****************************
+ * @addtogroup ILI9XXX
+ * | BSP Manufacture | BSP Name | BSP Version |
+ * | :---: | :---: | :---: |
+ * | ${manufactureName} | ${packageString?keep_before(".")} | ${packageString?keep_after(".")} |
+ *******************************/
 [#-- Global variables --]
 [#if SWIP.variables??]
 	[#list SWIP.variables as variable]
@@ -109,34 +109,45 @@ extern ${variable.value} ${variable.name};
 /* USER CODE END ${dashedFileNamed} ${UserCodeCounter} */
   [#assign UserCodeCounter++]
 
-/*************    Display Type    *****************
+/** @addtogroup ILI9XXX_Config_Defines
+ * @{
+ */
+
+/** ****************************
+ * @brief           Display Type
+ *
  * which display are you using?
- * ILI9341
- * ILI9488_V1
- * ILI9488_V2
+ * - ILI9341
+ * - ILI9488_V1
+ * - ILI9488_V2
  *************************************************/
 #define ${Display_Type}
 
-
-/***************** SPI PORT SPEED  *****************
- * define HERE the prescaler value to assign SPI port 
+/** ***************  *****************
+ * @brief         SPI PORT SPEED
+ *
+ * define HERE the prescaler value to assign SPI port
  * when transferring data to/from DISPLAY or TOUCH
  * Keep in mind that Touch SPI Baudrate should be no more than 1 Mbps
+ *
+ * This must be a predefined name coming from STM HAL SPI_BaudRate_Prescaler
  ***************************************************/
 #define DISPL_PRESCALER SPI_BAUDRATE${Display_Prescaler}     //prescaler assigned to display SPI port
 
-
-/************* SPI COMMUNICATION MODE **************
- *** enable SPI mode want, uncommenting ONE row ****
- **** (Setup the same configuration on CubeMX) *****
- * DISPLAY_SPI_POLLING_MODE
- * DISPLAY_SPI_INTERRUPT_MODE
- * DISPLAY_SPI_DMA_MODE // (mixed: polling/DMA, see below)
+/** ***********  **************
+ * @brief       SPI COMMUNICATION MODE
+ *
+ * enable SPI mode want, uncommenting ONE row
+ * - DISPLAY_SPI_POLLING_MODE
+ * - DISPLAY_SPI_INTERRUPT_MODE
+ * - DISPLAY_SPI_DMA_MODE // (mixed: polling/DMA, see below)
+ *
+ * @note Setup the same configuration on CubeMX
  ***************************************************/
  #define DISPLAY_SPI_${Display_SPI_Mode}
 
 
-/***************** Backlight timer *****************
+/** *************** Backlight timer *****************
  * if you want dimming backlight UNCOMMENT the
  * DISPLAY_DIMMING_MODE below define and properly
  * set other defines.
@@ -159,50 +170,28 @@ extern ${variable.value} ${variable.name};
 #define BKLIT_STBY_LEVEL 			50				//Display backlight level when in stand-by (levels are CNT values)
 #define BKLIT_INIT_LEVEL 			100				//Display backlight level on startup
 
-
-[#if USE_TOUCHGFX??]
-/************ Enable TouchGFX interface ************
- * uncommenting the below #define to enable
- * functions interfacing TouchGFX
- ***************************************************/
-#define DISPLAY_USING_TOUCHGFX
-
-
-/***************** TouchGFX Time base timer *****************
- * If using library in TouchGFX-full-mode
- * (see GitHub page indicated on top for details)
- * you have to set #define DELAY_TO_KEY_REPEAT -1
- * in "z_touch_XPT2046.h" and setup a timer as a 
- * time base for TouchGFX. 
- * It has to be set to generate a
- * HAL_TIM_PeriodElapsedCallback 60 times per second
- * That timer has to be assigned to the below macros.
- * if not in TouchGFX-full-mode: assign macros to 
- * an unused timer
- ***************************************************/
-#define TGFX_TIMER			TIM3
-#define TGFX_T				htim3
-[/#if]
-
-
-/************* frame buffer DEFINITION *************
- * IF NO TOUCHGFX: 
- * BUFLEVEL defines size of each one of the 2 SPI 
- * buffers: buffer size is 2^BUFLEVEL so 2 means 
+/** ***********  *************
+ * @brief       frame buffer DEFINITION
+ *
+ * - IF NO TOUCHGFX:
+ * BUFLEVEL defines size of each one of the 2 SPI
+ * buffers: buffer size is 2^BUFLEVEL so 2 means
  * 4 bytes buffer and 10 means 1 kbyte (each).
  * It must be not below 10!
- * If TOUCHGFX:
- * buffers are not used if display handles RGB565. 
- * If display uses RGB666 one buffer will be used for 
+ * - If TOUCHGFX:
+ * buffers are not used if display handles RGB565.
+ * If display uses RGB666 one buffer will be used for
  * color format translation. In this case set
  * BUFLEVEL following this table:
- * TouchGFX buffers>10KB need BUFLEVEL 15
- * TouchGFX buffers>5KB  need BUFLEVEL 14
- * TouchGFX buffers>2700bytes need BUFLEVEL 13
- * TouchGFX buffers>1300bytes need BUFLEVEL 12
+ *  + TouchGFX buffers>10KB need BUFLEVEL 15
+ *  + TouchGFX buffers>5KB  need BUFLEVEL 14
+ *  + TouchGFX buffers>2700bytes need BUFLEVEL 13
+ *  + TouchGFX buffers>1300bytes need BUFLEVEL 12
 ***************************************************/
 #define BUFLEVEL ${Display_BufferSize}
-
+ 
+/** @} */ // end of addtogroup ILI9XXX_Config_Defines 
+ 
 #ifdef __cplusplus
 }
 #endif

@@ -1,6 +1,6 @@
-/*
- * 	z_displ_ILI94XX.c
- * 	rel. TouchGFX.1.30
+/**
+ * @file	z_displ_ILI9XXX.c
+ * @version 	rel. TouchGFX.1.30
  *
  *  Created on: 5 giu 2023
  *      Author: mauro
@@ -14,6 +14,8 @@
 
 #include "main.h"
 
+
+/** @brief extern handle to the SPI */
 extern SPI_HandleTypeDef DISPL_SPI_PORT;
 
 #ifdef DISPLAY_DIMMING_MODE
@@ -24,9 +26,9 @@ extern TIM_HandleTypeDef BKLIT_T;
 extern TIM_HandleTypeDef TGFX_T;
 #endif
 
-extern volatile uint8_t Touch_PenDown;				// set to 1 by pendown interrupt callback, reset to 0 by sw
-Displ_Orientat_e current_orientation;				// it records the active display orientation. Set by Displ_Orientation
-volatile uint8_t Displ_SpiAvailable=1;  			// 0 if SPI is busy or 1 if it is free (transm cplt)
+extern volatile uint8_t Touch_PenDown;				///< set to 1 by pendown interrupt callback, reset to 0 by sw
+Displ_Orientat_e current_orientation;				///< it records the active display orientation. Set by Displ_Orientation
+volatile uint8_t Displ_SpiAvailable=1;  			///< 0 if SPI is busy or 1 if it is free (transm cplt)
 int16_t _width;       								///< (oriented) display width
 int16_t _height;      								///< (oriented) display height
 
@@ -46,10 +48,7 @@ static uint8_t dispBuffer2[SIZEBUF];
 #endif //DISPLAY_USING_TOUCHGFX
 static uint8_t *dispBuffer=dispBuffer1;
 
-
-
-
-/******************************************
+/** ****************************************
  * @brief	enable display, disabling touch
  * 			device selected if CS low
  ******************************************/
@@ -68,13 +67,13 @@ void Displ_Select(void) {
 	}
 }
 
-/**************************
- * @BRIEF	engages SPI port communicating with displayDC_Status
+/** ************************
+ * @brief	engages SPI port communicating with displayDC_Status
  * 			depending on the macro definition makes transmission in Polling/Interrupt/DMA mode
- * @PARAM	DC_Status 	indicates if sending command or data
- * @PARAM	data		buffer data to send
- * @PARAM	dataSize	number of bytes in "data" to be sent
- * @PARAM	isTouchGFXBuffer 1 only when called by touchgfxDisplayDriverTransmitBlock (for byte endian conversion). All other cases 0
+ * @param[in]	DC_Status 	indicates if sending command or data
+ * @param[in]	data		buffer data to send
+ * @param[in]	dataSize	number of bytes in "data" to be sent
+ * @param[in]	isTouchGFXBuffer 1 only when called by touchgfxDisplayDriverTransmitBlock (for byte endian conversion). All other cases 0
  **************************/
 void Displ_Transmit(GPIO_PinState DC_Status, uint8_t* data, uint16_t dataSize, uint8_t isTouchGFXBuffer ){
 
@@ -134,25 +133,26 @@ void Displ_Transmit(GPIO_PinState DC_Status, uint8_t* data, uint16_t dataSize, u
 #endif //DISPLAY_SPI_INTERRUPT_MODE
 	}
 
-/**********************************
- * @BRIEF	transmit a byte in a SPI_COMMAND format
+/** ********************************
+ * @brief	transmit a byte in a SPI_COMMAND format
+ * @param[in] cmd The command to send
  **********************************/
 void Displ_WriteCommand(uint8_t cmd){
 	Displ_Transmit(SPI_COMMAND, &cmd, sizeof(cmd),0);
 }
 
-/**********************************
- * @BRIEF	transmit a set of data in a SPI_DATA format
- * @PARAM 	data		buffer data to send
- * 			dataSize	number of bytes in "data" to be sent
- * 			isTouchGFXBuffer 1 only when called by touchgfxDisplayDriverTransmitBlock (for byte endian conversion). All other cases 0
+/** ********************************
+ * @brief	transmit a set of data in a SPI_DATA format
+ * @param[in] 	buff		buffer data to send
+ * @param[in]		buff_size	number of bytes in "data" to be sent
+ * @param[in]		isTouchGFXBuffer 1 only when called by touchgfxDisplayDriverTransmitBlock (for byte endian conversion). All other cases 0
  **********************************/
 void Displ_WriteData(uint8_t* buff, size_t buff_size, uint8_t isTouchGFXBuffer){
 	if (buff_size==0) return;
 	Displ_Transmit(SPI_DATA, buff, buff_size, isTouchGFXBuffer);
 }
 
-/**********************************
+/** ********************************
  * @brief	ILIXXX initialization sequence
  **********************************/
 void ILI9XXX_Init(){
@@ -237,7 +237,7 @@ void ILI9XXX_Init(){
 
 }
 
-/**********************************************
+/** ********************************************
  * @brief	defines the display area involved
  * 			in a writing operation and set
  * 			display ready to receive pixel
@@ -259,7 +259,7 @@ void Displ_SetAddressWindow(uint16_t x1, uint16_t y1, uint16_t x2, uint16_t y2) 
 	Displ_WriteCommand(ILI9XXX_MEMWR);
 }
 
-/*****************************************************
+/** ***************************************************
  * @brief				first display initialization.
  * @param	orientation	display orientation
  *****************************************************/
@@ -282,9 +282,9 @@ void Displ_Init(Displ_Orientat_e orientation){
 	Displ_Orientation(orientation);
 }
 
-/**********************************************
+/** ********************************************
  * @brief		set orientation of the display
- * @param  	m	orientation
+ * @param  	orientation
  **********************************************/
 void Displ_Orientation(Displ_Orientat_e orientation){
 	static uint8_t data[1];
@@ -315,20 +315,14 @@ void Displ_Orientation(Displ_Orientat_e orientation){
 	current_orientation = orientation;  //stores active orientation into a global variable for touch routines
 }
 
-
-
-
+/** @brief Overwrite the weak HAL callback */
 void HAL_SPI_ErrorCallback(SPI_HandleTypeDef *hspi){
 	if (hspi->Instance==DISPL_SPI) {
 		Displ_SpiAvailable=1;
 	}
 }
 
-
-
-
-
-
+/** @brief Overwrite the weak HAL callback */
 void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi) {
 	if (hspi->Instance==DISPL_SPI) {
 		Displ_SpiAvailable=1;
@@ -340,14 +334,10 @@ void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi) {
 	}
 }
 
-
-
-
-
-/*****************************
+/** ***************************
  * @brief	fill a rectangle with a color
  * @param	x, y	top left corner of the rectangle
- * 			w, h 	width and height of the rectangle
+ * @param[in]			w, h 	width and height of the rectangle
  ******************************/
 void Displ_FillArea(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t color) {
 /* four steps:
@@ -436,8 +426,8 @@ void Displ_FillArea(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t col
 
 #ifndef DISPLAY_USING_TOUCHGFX
 
-/*****************************************
- * WARNING: non tested, never used
+/** ***************************************
+ * @warning: non tested, never used
  *****************************************/
 void ILI9488_DrawImage(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint8_t *data, uint32_t size){
 	Displ_SetAddressWindow(x, y, w+x-1, h+y-1);
@@ -447,10 +437,10 @@ void ILI9488_DrawImage(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint8_t *
 
 
 
-/***********************
+/** *********************
  * @brief	print a single pixel
- * @params	x, y	pixel position on display
- * 			color	... to be printed
+ * @param[in]	x, y	pixel position on display
+ * @param[in]			color	... to be printed ( @ref ILI9XXX_COLOR_NAMES )
  ***********************/
 void Displ_Pixel(uint16_t x, uint16_t y, uint16_t color) {
     if((x >= _width) || (y >= _height))
@@ -459,9 +449,10 @@ void Displ_Pixel(uint16_t x, uint16_t y, uint16_t color) {
 
 }
 
-
-
-
+/** @brief To draw a circle
+ *  @param[in] x0,y0 Center point of the circle
+ *  @param[in] r   Radius of the circle
+ *  @param[in] color  The color ( @ref ILI9XXX_COLOR_NAMES ) */
 void Displ_drawCircle(int16_t x0, int16_t y0, int16_t r, uint16_t color) {
     int16_t f = 1 - r;
     int16_t ddF_x = 1;
@@ -496,33 +487,19 @@ void Displ_drawCircle(int16_t x0, int16_t y0, int16_t r, uint16_t color) {
     }
 }
 
-
-
-
-
-/*****************
+/** ***************
  * @brief	clear display with a color.
- * @param	bgcolor
+ * @param	bgcolor ( @ref ILI9XXX_COLOR_NAMES )
  *****************/
 void Displ_CLS(uint16_t bgcolor){
 	Displ_FillArea(0, 0, _width, _height, bgcolor);
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/** @brief draw a circle quarter related to a virtual corner
+ *  @param[in] x0,y0  position of the corner
+ *  @param[in] r      radius of the circle
+ *  @param[in] cornername where is the corner related to the center
+ *  @param[in] color  The color ( @ref ILI9XXX_COLOR_NAMES )*/
 void drawCircleHelper( int16_t x0, int16_t y0, int16_t r, uint8_t cornername, uint16_t color)
 {
     int16_t f     = 1 - r;
@@ -559,14 +536,15 @@ void drawCircleHelper( int16_t x0, int16_t y0, int16_t r, uint8_t cornername, ui
     }
 }
 
-
-
-
-
-
-
-
-
+/** @brief draw a circle quarter related to a virtual corner
+ *
+ *  @warning this function seams untested and not full implemented
+ *
+ *  @param[in] x0,y0  position of the corner
+ *  @param[in] r      radius of the circle
+ *  @param[in] delta  who knows
+ *  @param[in] cornername where is the corner related to the center
+ *  @param[in] color  The color ( @ref ILI9XXX_COLOR_NAMES )*/
 void fillCircleHelper(int16_t x0, int16_t y0, int16_t r, uint8_t cornername, int16_t delta, uint16_t color)
 {
 	int16_t f     = 1 - r;
@@ -596,22 +574,17 @@ void fillCircleHelper(int16_t x0, int16_t y0, int16_t r, uint8_t cornername, int
   }
 }
 
-
-
-
-
-
+/** @brief draw a filled circle
+ *
+ *  @param[in] x0,y0  position of the corner
+ *  @param[in] r      radius of the circle
+ *  @param[in] color  The color ( @ref ILI9XXX_COLOR_NAMES )*/
 void Displ_fillCircle(int16_t x0, int16_t y0, int16_t r, uint16_t color) {
     Displ_Line(x0, y0-r, x0, y0+r, color);
     fillCircleHelper(x0, y0, r, 3, 0, color);
 }
 
-
-
-
-
-
-/************************************************************************
+/** **********************************************************************
  * @brief	draws a line from "x0","y0" to "x1","y1" of the given "color"
  ************************************************************************/
 void Displ_Line(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint16_t color)
@@ -682,21 +655,12 @@ void Displ_Line(int16_t x0, int16_t y0, int16_t x1, int16_t y1, uint16_t color)
     }
 }
 
-
-
-
-
-
-
-
-
-
-/***********************
+/** *********************
  * @brief	print an empty rectangle of a given thickness
- * @params	x, y	top left corner
+ * @param[in]	x, y	top left corner
  * 			w, h	width and height
  * 			t		border thickness
- * 			color	border color, inner part unchanged
+ * 			color	border color, inner part unchanged ( @ref ILI9XXX_COLOR_NAMES )
  ***********************/
 void Displ_Border(int16_t x, int16_t y, int16_t w, int16_t h, int16_t t,  uint16_t color){
 	Displ_FillArea(x, y, w, t, color);
@@ -705,10 +669,11 @@ void Displ_Border(int16_t x, int16_t y, int16_t w, int16_t h, int16_t t,  uint16
 	Displ_FillArea(x+w-t, y, t, h, color);
 }
 
-
-
-
-
+/** *********************
+ * @brief print an empty triangle
+ * @param[in] x0, y0, x1, y1, x2, y2  corner positions
+ *      color line color, inner part unchanged ( @ref ILI9XXX_COLOR_NAMES )
+ ***********************/
 void Displ_drawTriangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t color)
 {
     Displ_Line(x0, y0, x1, y1, color);
@@ -716,12 +681,11 @@ void Displ_drawTriangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t 
     Displ_Line(x2, y2, x0, y0, color);
 }
 
-
-
-
-
-
-
+/** *********************
+ * @brief print a filled triangle
+ * @param[in] x0, y0, x1, y1, x2, y2  corner positions
+ *      color line color, inner part unchanged ( @ref ILI9XXX_COLOR_NAMES )
+ ***********************/
 void Displ_fillTriangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t x2, int16_t y2, uint16_t color)
 {
 
@@ -802,19 +766,12 @@ void Displ_fillTriangle(int16_t x0, int16_t y0, int16_t x1, int16_t y1, int16_t 
     }
 }
 
-
-
-
-
-
-
-
-
-/***********************
+/** *********************
  * @brief	display one character on the display
  * @param 	x,y: top left corner of the character to be printed
- * 			ch, font, color, bgcolor: as per parameter name
- * 			size: (1 or 2) single or double wided printing
+ * @param[in]			ch, font as per parameter name
+ * @param[in]   color, bgcolor ( @ref ILI9XXX_COLOR_NAMES )
+ * @param[in]		size: (1 or 2) single or double wided printing
  **********************/
 void Displ_WChar(uint16_t x, uint16_t y, char ch, sFONT font, uint8_t size, uint16_t color, uint16_t bgcolor) {
     uint32_t i, b, bytes, j, bufSize, mask;
@@ -930,15 +887,13 @@ void Displ_WChar(uint16_t x, uint16_t y, char ch, sFONT font, uint8_t size, uint
 
 }
 
-
-
-
-
-
-
-
-
-
+/** *********************
+ * @brief print a rounded rectangle
+ * @param[in] x, y  corner position
+ *            w, h  width and height
+ *            r     radius for the corner
+ *            color line color, inner part unchanged ( @ref ILI9XXX_COLOR_NAMES )
+ ***********************/
 void Displ_drawRoundRect(int16_t x, int16_t y, int16_t w, int16_t h, int16_t r, uint16_t color)
 {
     int16_t max_radius = ((w < h) ? w : h) / 2; // 1/2 minor axis
@@ -953,10 +908,13 @@ void Displ_drawRoundRect(int16_t x, int16_t y, int16_t w, int16_t h, int16_t r, 
     drawCircleHelper(x+r    , y+h-r-1, r, 8, color);
 }
 
-
-
-
-
+/** *********************
+ * @brief print a filled rounded rectangle
+ * @param[in] x, y  corner position
+ *            w, h  width and height
+ *            r     radius for the corner
+ *            color line color, inner part unchanged ( @ref ILI9XXX_COLOR_NAMES )
+ ***********************/
 void Displ_fillRoundRect(int16_t x, int16_t y, int16_t w, int16_t h, int16_t r, uint16_t color)
 {
     int16_t max_radius = ((w < h) ? w : h) / 2; // 1/2 minor axis
@@ -966,20 +924,14 @@ void Displ_fillRoundRect(int16_t x, int16_t y, int16_t w, int16_t h, int16_t r, 
     fillCircleHelper(x+r    , y+r, r, 2, h-2*r-1, color);
 }
 
-
-
-
-
-
-
-/************************
+/** **********************
  * @brief	print a string on display starting from a defined position
- * @params	x, y	top left area-to-print corner
- * 			str		string to print
- * 			font	to bu used
- * 			size	1 (normal), 2 (double width)
- * 			color	font color
- * 			bgcolor	background color
+ * @param[in]	x, y	top left area-to-print corner
+ * @param[in]			str		string to print
+ * @param[in]			font	to bu used
+ * @param[in]			size	1 (normal), 2 (double width)
+ * @param[in]			color	font color ( @ref ILI9XXX_COLOR_NAMES )
+ * @param[in]			bgcolor	background color( @ref ILI9XXX_COLOR_NAMES )
  ************************/
 void Displ_WString(uint16_t x, uint16_t y, const char* str, sFONT font, uint8_t size, uint16_t color, uint16_t bgcolor) {
 	uint16_t delta=font.Width;
@@ -1008,19 +960,15 @@ void Displ_WString(uint16_t x, uint16_t y, const char* str, sFONT font, uint8_t 
     }
 }
 
-
-
-
-
-/************************
+/** **********************
  * @brief	print a string on display centering into a defined area
- * @params	x0, y0	top left area corner
- * 			x1, y1	bottom right corner
- * 			str		string to print
- * 			font	to bu used
- * 			size	1 (normal), 2 (double width)
- * 			color	font color
- * 			bgcolor	background color
+ * @param[in]	x0, y0	top left area corner
+ * @param[in]			x1, y1	bottom right corner
+ * @param[in]			str		string to print
+ * @param[in]			font	to bu used
+ * @param[in]			size	1 (normal), 2 (double width)
+ * @param[in]			color	font color ( @ref ILI9XXX_COLOR_NAMES )
+ * @param[in]			bgcolor	background color ( @ref ILI9XXX_COLOR_NAMES )
  ************************/
 void Displ_CString(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, const char* str, sFONT font, uint8_t size, uint16_t color, uint16_t bgcolor) {
 	uint16_t x,y;
@@ -1060,21 +1008,21 @@ void Displ_CString(uint16_t x0, uint16_t y0, uint16_t x1, uint16_t y1, const cha
 
 #endif
 
-
-
-
-
-/**************************************
+/** ************************************
  * @brief		set backlight level
  * 				PLEASE NOTE: if not in "DIMMING MODE" only 'F', '1', '0' and 'Q' available
- * @param	cmd	'S'		put display in stby (light level=BKLIT_STBY_LEVEL)
- * 				'W' 	wake-up from stdby restoring previous level
- *				'+'		add 1 step to the current light level
- *				'-'		reduce 1 step to the current light level
- *				'F','1'	set the display level to max
- *				'0'		set the display level to 0 (off)
- *				'I'		'Initialize'  IT MUST BE in dimming mode
- *              'Q'		do nothing, just return current level
+ * @param	cmd	see below
+ *
+ * available commands
+ * + 'S'		put display in stby (light level=BKLIT_STBY_LEVEL)
+ * + 'W' 	wake-up from stdby restoring previous level
+ * + '+'		add 1 step to the current light level
+ * + '-'		reduce 1 step to the current light level
+ * + 'F','1'	set the display level to max
+ * + '0'		set the display level to 0 (off)
+ * + 'I'		'Initialize'  IT MUST BE in dimming mode
+ * + 'Q'		do nothing, just return current level
+ *
  * @return		current backlight level
  **************************************/
 uint32_t  Displ_BackLight(uint8_t cmd) {
@@ -1141,9 +1089,7 @@ uint32_t  Displ_BackLight(uint8_t cmd) {
 #endif
 }
 
-
-
-/*********************************************************
+/** *******************************************************
  * @brief	TouchGFX integration: returns status of
  * 			communication to the display
  * @return	1 = there is a transmission running
@@ -1155,11 +1101,7 @@ int touchgfxDisplayDriverTransmitActive(){
 	return (!Displ_SpiAvailable);
 }
 
-
-
-
-
-/*********************************************************
+/** *******************************************************
  * @brief	TouchGFX integration: write to display the
  * 			block indicated by parameters
  *********************************************************/
@@ -1169,11 +1111,7 @@ void touchgfxDisplayDriverTransmitBlock(const uint8_t* pixels, uint16_t x, uint1
 		Displ_WriteData((uint8_t* )pixels,((w*h)<<1),1);
 }
 
-
-
-
-
-/*********************************************************
+/** *******************************************************
  * @brief	TouchGFX integration: this is the callback
  * 			function run by timer interrupt implementing
  * 			the tick timer for TouchGFX

@@ -1,30 +1,31 @@
-/*
- * 	z_displ_ILI9488.h
+/**
+ * 	@file   z_displ_ILI9488.h
  *	rel. TouchGFX.1.30
  *
  *  Created on: 05 giu 2023
  *      Author: mauro
- *
+ **/
+/** @addtogroup ILI9XXX
  *  licensing: https://github.com/maudeve-it/ILI9XXX-XPT2046-STM32/blob/c097f0e7d569845c1cf98e8d930f2224e427fd54/LICENSE
  *
  *	Installing and using this library follow instruction on: https://github.com/maudeve-it/ILI9XXX-XPT2046-STM32
  *
  *  These are the init instruction to put in you main() USER CODE BEGIN 2
  *
- *  (if Direct Handling)
- *  Displ_Init(Displ_Orientat_0);			// initialize display controller - set orientation parameter as per your needs
- *  Displ_CLS(BLACK);						// clear the screen - BLACK or any other color you prefer
- *  Displ_BackLight('I');  					// initialize backlight
+ *  - (if Direct Handling)
+ *    + Displ_Init(Displ_Orientat_0);			// initialize display controller - set orientation parameter as per your needs
+ *    + Displ_CLS(BLACK);						// clear the screen - BLACK or any other color you prefer
+ *    + Displ_BackLight('I');  					// initialize backlight
  *
- *  (if using TouchGFX - button mode)
- *  Displ_Init(Displ_Orientat_0);			// initialize display controller - set orientation parameter as per TouchGFX setup
- * 	touchgfxSignalVSync();					// ask display syncronization
- *  Displ_BackLight('I');  					// initialize backlight
+ *  - (if using TouchGFX - button mode)
+ *    + Displ_Init(Displ_Orientat_0);			// initialize display controller - set orientation parameter as per TouchGFX setup
+ * 	  + touchgfxSignalVSync();					// ask display syncronization
+ *    + Displ_BackLight('I');  					// initialize backlight
  *
- *  (if using TouchGFX - full mode)
- *  Displ_Init(Displ_Orientat_0);			// initialize display controller - set orientation parameter as per TouchGFX setup
- *  Displ_BackLight('I');  					// initialize backlight
- *  HAL_TIM_Base_Start_IT(&TGFX_T);			// start TouchGFX tick timer
+ *  - (if using TouchGFX - full mode)
+ *    + Displ_Init(Displ_Orientat_0);			// initialize display controller - set orientation parameter as per TouchGFX setup
+ *    + Displ_BackLight('I');  					// initialize backlight
+ *    + HAL_TIM_Base_Start_IT(&TGFX_T);			// start TouchGFX tick timer
  *
  *  see also z_touch_XPT2046.h
  *
@@ -91,17 +92,25 @@ typedef enum {
 } Displ_Orientat_e;
 
 
-#define SPI_COMMAND 	GPIO_PIN_RESET  	//DISPL_DC_Pin level sending commands
-#define SPI_DATA 		GPIO_PIN_SET		//DISPL_DC_Pin level sending data
+/** @addtogroup ILI9XXX_Private_Defines
+  * @{
+  */
+
+/** @brief DISPL_DC_Pin level sending commands */
+#define SPI_COMMAND 	GPIO_PIN_RESET
+/** @brief DISPL_DC_Pin level sending data */
+#define SPI_DATA 		GPIO_PIN_SET
 
 // set the buffers size as per BUFLEVEL and DISPLAY_USING_TOUCHGFX
 // (if using TouchGFX, don't buffers from this library)
+/** @brief doubling the configured value for internal use */
 #define SIZEBUF (1<<BUFLEVEL)
 
-
-/*******************************
- * Color names
- *******************************/
+/** @defgroup ILI9XXX_COLOR_NAMES
+ *******************************
+ *  @brief Color names
+ *******************************
+ *  @{ */
 #define	RED			0xF800
 #define	GREEN		0x07E0
 #define	BLUE		0x001F
@@ -129,37 +138,47 @@ typedef enum {
 #define DDD_WHITE	0x4208
 #define DDDD_WHITE	0x2104
 #define	BLACK		0x0000
-#define color565(r, g, b) ((((r) & 0xF8) << 8) | (((g) & 0xFC) << 3) | (((b) & 0xF8) >> 3))
+/** @} */ // end of defgroup ILI9XXX_COLOR_NAMES
 
+/** @defgroup ILI9XXX_COMMAND
+ **********************************
+ * @brief ILI9XXX LCD family commands
+ ***********************************
+ *  @{ */
+#define ILI9XXX_SLEEP_OUT			    0x11	///< wake up display
+#define ILI9XXX_DISPLAY_ON			  0x29	///< enable display
+#define ILI9XXX_PIXEL_FORMAT    	0x3A	///< RGB565/RGB666/...
+#define ILI9XXX_RGB_INTERFACE   	0xB0	///< type of communication (full duplex, half, etc.)
+#define ILI9XXX_MEMWR				      0x2C	///< writes into memory
+#define ILI9XXX_COLUMN_ADDR			  0x2A	///< set area display to write into
+#define ILI9XXX_PAGE_ADDR			    0x2B	///< set area display to write into
+#define ILI9XXX_MADCTL				    0x36	///< order followed writing into memory (-> screen orientation)
+#define ILI9XXX_MADCTL_0DEG 		  0X88	///< parameter of MADCTL command
+#define ILI9XXX_MADCTL_90DEG 		  0xE8	///< parameter of MADCTL command
+#define ILI9XXX_MADCTL_180DEG 		0x48	///< parameter of MADCTL command
+#define ILI9XXX_MADCTL_270DEG 		0x28	///< parameter of MADCTL command
 
-/**********************************
-/ ILI9XXX LCD family commands
- **********************************/
-#define ILI9XXX_SLEEP_OUT			0x11	//wake up display
-#define ILI9XXX_DISPLAY_ON			0x29	// enable display
-#define ILI9XXX_PIXEL_FORMAT    	0x3A	// RGB565/RGB666/...
-#define ILI9XXX_RGB_INTERFACE   	0xB0	// type of communication (full duplex, half, etc.)
-#define ILI9XXX_MEMWR				0x2C	// writes into memory
-#define ILI9XXX_COLUMN_ADDR			0x2A	// set area display to write into
-#define ILI9XXX_PAGE_ADDR			0x2B	// set area display to write into
-#define ILI9XXX_MADCTL				0x36	// order followed writing into memory (-> screen orientation)
-#define ILI9XXX_MADCTL_0DEG 		0X88	// parameter of MADCTL command
-#define ILI9XXX_MADCTL_90DEG 		0xE8	// parameter of MADCTL command
-#define ILI9XXX_MADCTL_180DEG 		0x48	// parameter of MADCTL command
-#define ILI9XXX_MADCTL_270DEG 		0x28	// parameter of MADCTL command
-
-#define ILI9XXX_INIT_SHORT_DELAY	5		// Hal_Delay parameter
-#define ILI9XXX_INIT_LONG_DELAY		150		// Hal_Delay parameter
+#define ILI9XXX_INIT_SHORT_DELAY	5		  ///< Hal_Delay parameter
+#define ILI9XXX_INIT_LONG_DELAY		150		///< Hal_Delay parameter
 
 #define ILI9XXX_POWER0				0xC0
 #define ILI9XXX_POWER1				0xC1
 #define ILI9488_POWER2				0xC2
 #define ILI9341_POWERA				0xCB
 #define ILI9341_POWERB				0xCF
+/** @} */ // end of defgroup ILI9XXX_COMMAND
 
+/**
+  * @}
+  */ // end of addtogroup ILI9XXX_Private_Defines
+
+/** @addtogroup ILI9XXX_Macro_Defines
+  * @{
+  */
 /**********************************************************
  * macro setting SPI baudrate prescaler
  **********************************************************/
+/** @brief Macro to calculate bit mask for SPI baudrate */
 #define SET_DISPL_SPI_BAUDRATE			DISPL_SPI->CR1 &= (uint16_t) ~SPI_CR1_BR_Msk; \
 										DISPL_SPI->CR1 |= DISPL_PRESCALER
 
@@ -167,11 +186,21 @@ typedef enum {
 										TOUCH_SPI->CR1 |= TOUCH_PRESCALER
 /**********************************************************/
 
+/** @brief Macro to calculate rgb byte */
+#define color565(r, g, b) ((((r) & 0xF8) << 8) | (((g) & 0xFC) << 3) | (((b) & 0xF8) >> 3))
 
+/** @brief Macro to swap bytes of a int16 value */
 #define _swap_int16_t(a, b)  { int16_t t = a; a = b; b = t; }
+/**
+  * @}
+  */ // end of addtogroup ILI9XXX_Macro_Defines
 
+/** @addtogroup ILI9XXX_Public_Function
+  * @{
+  */
 
 #ifndef DISPLAY_USING_TOUCHGFX
+/** @brief */
 void Displ_drawCircle(int16_t x0, int16_t y0, int16_t r, uint16_t color);
 void Displ_fillCircle(int16_t x0, int16_t y0, int16_t r, uint16_t color);
 
@@ -195,9 +224,23 @@ void Displ_FillArea(uint16_t x, uint16_t y, uint16_t w, uint16_t h, uint16_t col
 void Displ_Orientation(Displ_Orientat_e orientation);
 void Displ_Init(Displ_Orientat_e orientation);
 
+/**
+  * @}
+  */ // end of addtogroup ILI9XXX_Public_Function
+
+/** @addtogroup ILI9XXX_HAL_Function
+  * @{
+  */
 void HAL_SPI_ErrorCallback(SPI_HandleTypeDef *hspi);
 void HAL_SPI_TxCpltCallback(SPI_HandleTypeDef *hspi);
 
+/**
+  * @}
+  */ // end of addtogroup ILI9XXX_HAL_Function
+
+/** @addtogroup ILI9XXX_Public_Function
+  * @{
+  */
 uint32_t  Displ_BackLight(uint8_t cmd);
 
 
@@ -207,5 +250,9 @@ void touchgfxDisplayDriverTransmitBlock(const uint8_t* pixels, uint16_t x, uint1
 extern void DisplayDriver_TransferCompleteCallback();
 extern void touchgfxSignalVSync(void);
 #endif /* DISPLAY_USING_TOUCHGFX */
+
+/**
+  * @}
+  */ // end of addtogroup ILI9XXX_Public_Function
 
 #endif /* __Z_DISPL_ILI9XXX_H */
